@@ -1,7 +1,7 @@
 import React from 'react';
 import { Carousel } from 'antd';
-import Banner_1 from '../images/banner-1.avif';
-import Banner_2 from '../images/banner-2.avif';
+import Banner_1 from '../../images/banner-1.avif';
+import Banner_2 from '../../images/banner-2.avif';
 
 
 const contentStyle = {

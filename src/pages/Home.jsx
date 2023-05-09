@@ -1,6 +1,6 @@
 import React from 'react'
 import { Navigation } from '../components/navbar/Navigation'
-import { Craousel } from '../components/Craousel'
+import { Craousel } from '../components/slider/Craousel'
 
 function Home() {
   return (
