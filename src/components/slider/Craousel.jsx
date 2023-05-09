@@ -17,7 +17,7 @@ function Craousel() {
     const onChange = (currentSlide) => { };
   return (
     <>
-        <Carousel afterChange={onChange} autoplay={true}>
+        <Carousel afterChange={onChange} autoplay={true} className='mt-[90px]'>
             <div className='overflow-y-hidden' style={contentStyle}>
                 <img src={Banner_1} alt="banner" className='w-full object-cover'/>
             </div>
