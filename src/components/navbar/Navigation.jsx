@@ -6,6 +6,7 @@ import { IconContext } from 'react-icons';
 import { AiOutlineMenuFold } from 'react-icons/ai';
 import { GrClose } from 'react-icons/gr';
 import '../navbar/Navigation.css';
+import { Link } from 'react-router-dom';
 
 function Navigation() {
  
@@ -33,10 +34,10 @@ function Navigation() {
         <div className={`hidden w-full md:block md:w-auto z-50 menu${navbarOpen ? ' show-menu' : ''} `} id="navbar-default">
                 <ul className="flex flex-col p-4 md:p-0 border border-b-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:border-0 md:bg-white text-slate font-semibold hover:text-black text-lg  items-center">
                         <li>
-                            <a href="#" className="block py-4 px-3 text-slate hover:text-black md:border-0 md:p-0">Home</a>
+                            <Link to="/" className="block py-4 px-3 text-slate hover:text-black md:border-0 md:p-0">Home</Link>
                         </li>
                         <li>
-                            <a href="#" className="block py-4 px-3 text-slate hover:text-black md:border-0 md:p-0">Product</a>
+                            <Link to="/product" className="block py-4 px-3 text-slate hover:text-black md:border-0 md:p-0">Product</Link>
                         </li>
                         <li className='my-4'>
                             <a href="#" className="block p-2 bg-slate md:border-0  text-whiteSmoke rounded-full"> 
