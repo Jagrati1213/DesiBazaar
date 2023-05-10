@@ -1,8 +1,11 @@
 import React from 'react'
 
 function Product() {
+
   return (
-    <div>Product</div>
+    <main className='mt-[90px]'>
+
+    </main>
   )
 }
 

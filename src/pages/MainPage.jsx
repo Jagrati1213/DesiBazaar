@@ -10,7 +10,7 @@ import Cart from './Cart';
 function MainPage() {
   return (
     <Router>
-    <main className='h-full min-h-screen w-full bg-blue-800'>
+    <main className='h-full min-h-screen w-full'>
         <Header/>
      <Routes>
         <Route index element={<Home />} />

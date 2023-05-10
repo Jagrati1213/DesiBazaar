@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import { FaShoppingBag, FaHeart } from 'react-icons/fa';
 import { GoPerson } from 'react-icons/go';
 import { IconContext } from 'react-icons';
-import { ClockCircleOutlined } from '@ant-design/icons';
-import { Avatar, Badge, Space } from 'antd';
+import {Badge } from 'antd';
 
 function MenuList({navbarOpen}) {
+
   return (
     <>
     <div className={`hidden w-full md:block md:w-auto z-50 menu${navbarOpen ? ' show-menu' : ''} `} id="navbar-default">
@@ -33,7 +33,6 @@ function MenuList({navbarOpen}) {
                     <Badge count={0} showZero>
                         <IconContext.Provider value={{size:'26px' ,color:'#2c4152'}}><FaShoppingBag/></IconContext.Provider>
                     </Badge>
-
                 </a>
             </li>
         </ul>
