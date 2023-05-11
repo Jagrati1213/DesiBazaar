@@ -6,7 +6,8 @@ function Home() {
   return (
     <main className='h-full min-h-screen w-full'>
           <Craousel/>
-          <LimitProduct/>
+          <LimitProduct baseurl={'https://fakestoreapi.com/products/category/jewelery'} title={"Jewelery"}/>
+          <LimitProduct baseurl={'https://fakestoreapi.com/products/category/electronics'} title={"Electronics"}/>
     </main>
   )
 }

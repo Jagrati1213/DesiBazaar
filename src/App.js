@@ -3,7 +3,7 @@ import { MainPage } from './pages/MainPage';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App bg-stone-100">
       <MainPage />
     </div>
   );
