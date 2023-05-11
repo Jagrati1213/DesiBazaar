@@ -5,6 +5,8 @@ import { BsBagHeartFill } from "react-icons/bs";
 import { IconContext } from 'react-icons';
 import { useLocation, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { addItems } from '../reduxStore/Reducer';
 
 
 function SingleProduct() {
@@ -14,7 +16,10 @@ function SingleProduct() {
 
   // for get productId 
   const params = useParams();
-  
+
+  // for using additem
+  const dispatch = useDispatch();
+
    useEffect(()=>{
 
     const fetchSingleProduct = async()=>{
@@ -29,6 +34,11 @@ function SingleProduct() {
     fetchSingleProduct();
    },[params]);
 
+  //  set product to addItem
+   const addToCart = (singlepr)=>{
+     dispatch(addItems(singlepr))
+   }
+
   return (
     <main className='mt-[90px] w-full min-h-screen py-[4rem]'>
       {
@@ -36,7 +46,7 @@ function SingleProduct() {
           <Row className='h-auto mx-[10rem]'>
 
             {/* SingleProduct Image */}
-            <Col span={12} className='border flex justify-center items-center p-4 overflow-hidden'>
+            <Col span={12} className='border-r-2 flex justify-center items-center p-4 overflow-hidden'>
             <Image.PreviewGroup
                 preview={{
                   onChange: (current, prev) => console.log(`current index: ${current}, prev index: ${prev}`),
@@ -46,7 +56,7 @@ function SingleProduct() {
             </Col>
 
             {/* SingleProduct Details */}
-            <Col span={12} className='border p-8'>
+            <Col span={12} className='p-8'>
                 
                 <h1 className='text-3xl text-slate font-bold uppercase'>{singlepr.title}</h1>
                 <p className='text-lg text-gray-500 break-words my-4'> {singlepr.description}</p>
@@ -59,7 +69,10 @@ function SingleProduct() {
                     })
                   }
                 </div>
-                <button className='font-bold rounded text-whiteSmoke bg-slate hover:bg-black py-3 px-10 text-base my-10 flex items-center'>
+                <button 
+                onClick={(singlepr)=>{
+                  addToCart(singlepr)}} 
+                  className='font-bold rounded text-whiteSmoke bg-slate hover:bg-black py-3 px-10 text-base my-10 flex items-center'>
                   <IconContext.Provider value={{size:'18px'}}><BsBagHeartFill className='mr-2'/> </IconContext.Provider>
                   <span>Add to bag</span>
                 </button>
