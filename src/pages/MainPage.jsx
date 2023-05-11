@@ -15,7 +15,7 @@ function MainPage() {
      <Routes>
         <Route index element={<Home />} />
         <Route path='/product' element={<Product />} />
-        <Route path='/product/:id' element={<SingleProduct />} />
+        <Route path='/product/:producId' element={<SingleProduct />} />
         <Route path='/cart' element={<Cart />} />
       </Routes>
       </main>
