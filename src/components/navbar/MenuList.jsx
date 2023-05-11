@@ -31,7 +31,9 @@ function MenuList({navbarOpen}) {
             <li className='md:my-0 my-4'>
                 <a href="#" className="block p-2 text-slate">
                     <Badge count={0} showZero>
-                        <IconContext.Provider value={{size:'26px' ,color:'#2c4152'}}><FaShoppingBag/></IconContext.Provider>
+                        <IconContext.Provider value={{size:'26px' ,color:'#2c4152'}}>
+                            <Link to='/cart'><FaShoppingBag/></Link>
+                            </IconContext.Provider>
                     </Badge>
                 </a>
             </li>
