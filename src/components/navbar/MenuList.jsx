@@ -19,23 +19,21 @@ function MenuList({navbarOpen}) {
                 <Link to="/product" className="block py-4 px-3 text-slate hover:text-black md:p-0">Product</Link>
             </li>
             <li className='md:my-0 my-4'>
-                <a href="#" className="block p-2 bg-slate text-whiteSmoke rounded-full"> 
-                        <IconContext.Provider value={{size:'18px'}}><GoPerson/></IconContext.Provider>
-                </a>
+                <Link tp="/" className="block p-2 bg-slate text-whiteSmoke rounded-full"> 
+                    <IconContext.Provider value={{size:'18px'}}><GoPerson/></IconContext.Provider>
+                </Link>
             </li>
             <li className='md:my-0 my-4'>
-                <a href="#" className="block p-2 bg-slate text-whiteSmoke rounded-full">
+                <Link tp="/" className="block p-2 bg-slate text-whiteSmoke rounded-full">
                     <IconContext.Provider value={{size:'18px'}}><FaHeart/></IconContext.Provider>
-                </a>
+                </Link>
             </li>
             <li className='md:my-0 my-4'>
-                <a href="#" className="block p-2 text-slate">
-                    <Badge count={0} showZero>
-                        <IconContext.Provider value={{size:'26px' ,color:'#2c4152'}}>
+                <Badge count={0} showZero className="block p-2 text-slate">
+                    <IconContext.Provider value={{size:'26px' ,color:'#2c4152'}}>
                             <Link to='/cart'><FaShoppingBag/></Link>
-                            </IconContext.Provider>
-                    </Badge>
-                </a>
+                    </IconContext.Provider>
+                </Badge>
             </li>
         </ul>
     </div>
