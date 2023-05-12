@@ -5,7 +5,7 @@ import { Product } from '../pages/Product';
 import { Header } from '../components/navbar/Header'
 import SingleProduct from './SingleProduct';
 import Cart from './Cart';
-
+import { Toaster } from "react-hot-toast";
 
 function MainPage() {
   return (
@@ -18,6 +18,7 @@ function MainPage() {
         <Route path='/product/:producId' element={<SingleProduct />} />
         <Route path='/cart' element={<Cart />} />
       </Routes>
+      <Toaster/>
       </main>
     </Router>
   )
