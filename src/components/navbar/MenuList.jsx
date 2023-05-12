@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaShoppingBag, FaHeart } from 'react-icons/fa';
 import { GoPerson } from 'react-icons/go';
 import { IconContext } from 'react-icons';
 import {Badge } from 'antd';
+import { useSelector } from 'react-redux';
 
 function MenuList({navbarOpen}) {
+
+    const cartItem = useSelector(state => state.product);
+    const [count, setCount] = useState(0);
+    useEffect(()=>{
+        setCount(cartItem.products.length);
+    },[cartItem]);
 
   return (
     <>
@@ -29,7 +36,7 @@ function MenuList({navbarOpen}) {
                 </Link>
             </li>
             <li className='md:my-0 my-4'>
-                <Badge count={0} showZero className="block p-2 text-slate">
+                <Badge count={count} showZero className="block text-slate">
                     <IconContext.Provider value={{size:'26px' ,color:'#2c4152'}}>
                             <Link to='/cart'><FaShoppingBag/></Link>
                     </IconContext.Provider>
