@@ -7,8 +7,9 @@ export const productReducre = createSlice({
     name: "cart",
     initialState,
     reducers: {
-        addItems: (state, acton) => {
-            state.products.push(acton.payload)
+        addItems: (state, action) => {
+            console.log(action.payload);
+            state.products.push(action.payload)
         }
     }
 })
