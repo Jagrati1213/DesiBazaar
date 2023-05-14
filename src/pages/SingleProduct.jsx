@@ -77,7 +77,7 @@ function SingleProduct() {
                 </div>
                 
                 <button 
-                onClick={()=>{ addToCart({singlepr}) }} 
+                onClick={()=>{ addToCart(singlepr) }} 
                   className='font-bold rounded text-whiteSmoke bg-slate hover:bg-black py-3 px-10 text-base my-10 flex items-center'>
                   <IconContext.Provider value={{size:'18px'}}><BsBagHeartFill className='mr-2'/> </IconContext.Provider>
                   <span>Add to bag</span>
