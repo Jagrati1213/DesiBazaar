@@ -27,6 +27,7 @@ export const productReducre = createSlice({
             }
             else {
                 // Added to Cart;
+                toast.success('Added to Bag');
                 state.products.push({ item, quantity: 1 });
             }
         },

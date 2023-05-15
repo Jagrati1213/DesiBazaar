@@ -7,7 +7,6 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { addItems, addToList, calculatePrice } from '../reduxStore/Reducer';
-import { toast } from 'react-hot-toast';
 
 
 function SingleProduct() {
@@ -15,13 +14,13 @@ function SingleProduct() {
   const [singlepr, setSinglePr] = useState(null);
   const [rate, setRate] = useState(0);
 
-  //***** For Get ProductId *****// 
+  //_____ For Get ProductId 
   const params = useParams();
 
-  //***** For Calling AddToCart *****//
+  //_____ For Calling AddToCart
   const dispatch = useDispatch();
 
-  //***** Fetching Single Product *****//
+  //_____ Fetching Single Product 
   const fetchSingleProduct = async()=>{
 
     await axios.get(`https://fakestoreapi.com/products/${params.producId}`)
@@ -35,14 +34,13 @@ function SingleProduct() {
        fetchSingleProduct()
   },[params]);
 
-  //***** Set Product To Bag *****//
+  //_____ Set Product To Bag 
    const addToCart = (singlepr)=>{
-     toast.success('Added to Bag');
      dispatch(addItems(singlepr));
      dispatch(calculatePrice());
    }
 
-  //***** Set Product In List *****//
+  //_____ Set Product In wishList
   const addToWlist = (singlepr)=>{
     dispatch(addToList(singlepr));
   }
