@@ -1,10 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { toast } from 'react-hot-toast';
 
 const initialState = {
     products: [],
     total: 0,
     subTotal: 0,
-    delivery: 0
+    delivery: 0,
+    listArr: []
 }
 export const productReducre = createSlice({
     name: "cart",
@@ -12,6 +14,7 @@ export const productReducre = createSlice({
     reducers: {
 
         addItems: (state, action) => {
+
             const item = action.payload;
             const isItemExit = state.products.find((i) => i.item.id === item.id);
             if (isItemExit) {
@@ -60,12 +63,32 @@ export const productReducre = createSlice({
             state.subTotal = sum;
             state.delivery = state.subTotal > 1000 ? 0 : 200;
             state.total = state.subTotal + state.delivery;
-        }
+        },
+
+        addToList: (state, action) => {
+
+            const item = action.payload;
+            const isItemExit = state.listArr.find((i) => i.item.id === item.id);
+            if (isItemExit) {
+                // already exit in cart
+                state.products.forEach((ele) => {
+                    if (ele.item.id === item.id) {
+                        toast.success('Already exit in list')
+                    }
+                });
+            }
+            else {
+                // Added to Cart;
+                state.listArr.push({ item, quantity: 1 });
+                toast.success('Added to list')
+
+            }
+        },
 
 
     }
 })
-export const { addItems, decrementItems, incrementItems, calculatePrice } = productReducre.actions;
+export const { addItems, decrementItems, incrementItems, calculatePrice, addToList } = productReducre.actions;
 export default productReducre.reducer
 
 
