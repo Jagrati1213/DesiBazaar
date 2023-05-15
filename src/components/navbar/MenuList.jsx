@@ -8,15 +8,19 @@ import { useSelector } from 'react-redux';
 
 function MenuList({navbarOpen}) {
 
-    const cartItem = useSelector(state => state.product);
+    const {products} = useSelector(state => state.product);
     const [count, setCount] = useState(0);
     useEffect(()=>{
-        setCount(cartItem.products.length);
-    },[cartItem]);
+        let bagCount = 0;
+        products.map((item)=>{
+            bagCount += Number(item.quantity);
+        })
+        setCount(bagCount);
+    },[products]);
 
   return (
     <>
-    <div className={`hidden w-full md:block md:w-auto z-50 menu${navbarOpen ? ' show-menu' : ''} `} id="navbar-default">
+    <div className={`hidden w-full md:block md:w-auto z-50 menu${navbarOpen ? ' show-menu' : ''} `}>
         <ul className="flex flex-col p-4 md:p-0 bg-gray-50 md:flex-row md:space-x-8 md:bg-white text-slate font-semibold hover:text-black text-lg  items-center">
            
             <li>
@@ -31,9 +35,11 @@ function MenuList({navbarOpen}) {
                 </Link>
             </li>
             <li className='md:my-0 my-4'>
-                <Link tp="/" className="block p-2 bg-slate text-whiteSmoke rounded-full">
-                    <IconContext.Provider value={{size:'18px'}}><FaHeart/></IconContext.Provider>
-                </Link>
+                <IconContext.Provider value={{size:'18px'}}>
+                    <Link to="/whislist" className="block p-2 bg-slate text-whiteSmoke rounded-full">
+                        <FaHeart/>
+                    </Link>
+                </IconContext.Provider>
             </li>
             <li className='md:my-0 my-4'>
                 <Badge count={count} showZero className="block text-slate">
