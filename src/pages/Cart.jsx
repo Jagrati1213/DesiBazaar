@@ -31,6 +31,7 @@ function Cart() {
         { products.length > 0?
           (
           <>
+            {/* Cart Items */}
             <Col span={16} className='p-8 border-r-2'>
               <ul className=' overflow-y-scroll'>
                  {
@@ -40,22 +41,22 @@ function Cart() {
 
                       <div  className='flex'>
                           <div className='p-4 w-[200px] '>
-                            <img src={item.item.image} alt="product " className='w-full object-cover'/>
+                            <img src={item.item?.image} alt="product " className='w-full object-cover'/>
                           </div>
 
                           <div className='p-4'>
-                            <h3 className='text-lg text-slate font-bold'>{item.item.title}</h3>
-                            <p className='text-base text-gray-600 whitespace-nowrap overflow-hidden text-ellipsis w-[200px]'>{item.item.description}</p>
+                            <h3 className='text-lg text-slate font-bold'>{item.item?.title}</h3>
+                            <p className='text-base text-gray-600 whitespace-nowrap overflow-hidden text-ellipsis w-[200px]'>{item.item?.description}</p>
                             <div className='flex items-center my-2 text-zinc-800 font-medium'> 
-                              <span className='mr-2'>Price : ₹{Math.ceil(item.item.price)}</span>
+                              <span className='mr-2'>Price : ₹{Math.ceil(item.item?.price)}</span>
                             </div>
                             <p className=' text-crimson hover:underline cursor-pointer text-base'>Delete the item</p>
                           </div>
                       </div>
                        <div className='p-4 flex justify-center items-center text-lg font-medium'>
-                           <button className='py-1 px-4 rounded text-whiteSmoke bg-slate' onClick={()=> decrement(item.item.id)}>-</button>
-                           <span className='text-base text-center mx-4'>{item.quantity}</span>
-                           <button className='py-1 px-4 rounded text-whiteSmoke bg-slate' onClick={()=> increment(item.item.id)}>+</button>
+                           <button className='py-1 px-4 rounded text-whiteSmoke bg-slate' onClick={()=> decrement(item.item?.id)}>-</button>
+                           <span className='text-base text-center mx-4'>{item?.quantity}</span>
+                           <button className='py-1 px-4 rounded text-whiteSmoke bg-slate' onClick={()=> increment(item.item?.id)}>+</button>
                       </div>
                   </li>)
                   })
@@ -63,6 +64,7 @@ function Cart() {
               </ul>
             </Col>
 
+            {/* Cart items total */}
             <Col span={8} className='p-8 flex justify-center'>
                     <aside className='rounded'>
                         <div className=" bg-zinc-200 border p-6 w-[500px] text-[18px]">
