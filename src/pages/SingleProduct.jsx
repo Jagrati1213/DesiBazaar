@@ -6,7 +6,7 @@ import { IconContext } from 'react-icons';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { addItems } from '../reduxStore/Reducer';
+import { addItems, calculatePrice } from '../reduxStore/Reducer';
 import { toast } from 'react-hot-toast';
 
 
@@ -38,7 +38,9 @@ function SingleProduct() {
   //  set product to addItem
    const addToCart = (singlepr)=>{
      toast.success('Add to Cart')
-     dispatch(addItems(singlepr))
+     dispatch(addItems(singlepr));
+     dispatch(calculatePrice());
+
    }
 
   return (
