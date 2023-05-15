@@ -22,14 +22,14 @@ function LimitProduct({baseurl,title}) {
  },[]);
 
   return (
-    <main className='p-4 md:p-10 w-full my-10 site-card-wrapper'>
-        <h1 className='w-full text-center font-bold text-3xl text-slate my-10'> {title}</h1>
-        <Row gutter={{  xs: 8, sm: 16, md: 24, lg: 32 }} justify="space-center">
+    <main className='p-4 md:p-10 w-full py-10 site-card-wrapper'>
+        <h1 className='w-full text-center font-bold text-3xl text-slate uppercase my-10 py-4'> {title}</h1>
+        <Row gutter={{ xs: 8, sm: 16, lg: 17 }} justify="space-center">
 
             {
                 limitProduct ?(
                         limitProduct.map(i=>{
-                            return <Col className="gutter-row" span={6} key={i.id} style={{cursor:'pointer'}}> 
+                            return <Col className="gutter-row"  xs={{span: 24, }} lg={{span: 6}} md={{span: 8}} key={i.id} style={{cursor:'pointer'}}> 
                                    <Link to={`/product/${i.id}`}>
                                         <Card style={{overflow:'hidden', marginBottom:'2rem'}} 
                                             cover={
@@ -43,7 +43,7 @@ function LimitProduct({baseurl,title}) {
                                             }
                                             actions={[]}
                                             >
-                                        <Meta title={i.title} description={`₹${i.price}`}/>
+                                        <Meta title={i.title} description={`₹${Math.ceil(i.price)}`}/>
                                         </Card>
                                    </Link>
                                  </Col>
