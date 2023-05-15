@@ -47,7 +47,7 @@ function Cart() {
                             <h3 className='text-lg text-slate font-bold'>{item.item.title}</h3>
                             <p className='text-base text-gray-600 whitespace-nowrap overflow-hidden text-ellipsis w-[200px]'>{item.item.description}</p>
                             <div className='flex items-center my-2 text-zinc-800 font-medium'> 
-                              <span className='mr-2'>Price : ₹{item.item.price}</span>
+                              <span className='mr-2'>Price : ₹{Math.ceil(item.item.price)}</span>
                             </div>
                             <p className=' text-crimson hover:underline cursor-pointer text-base'>Delete the item</p>
                           </div>

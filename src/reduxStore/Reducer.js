@@ -55,7 +55,7 @@ export const productReducre = createSlice({
         calculatePrice: (state) => {
             let sum = 0;
             state.products.forEach((i) =>
-                (sum += Number(i.item.price) * Number(i.quantity))
+                (sum += Number(Math.ceil(i.item.price)) * Number(i.quantity))
             );
             state.subTotal = sum;
             state.delivery = state.subTotal > 1000 ? 0 : 200;
