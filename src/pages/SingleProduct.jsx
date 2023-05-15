@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Row,Image } from 'antd';
 import { StarFilled } from "@ant-design/icons";
-import { BsBagHeartFill } from "react-icons/bs";
+import { BsBagHeartFill, BsHeartFill} from "react-icons/bs";
 import { IconContext } from 'react-icons';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -68,22 +68,30 @@ function SingleProduct() {
 
                 <p className='text-lg text-black break-words my-4 font-semibold'> Category: {singlepr.category}</p>
 
-                <p className='text-lg text-black break-words my-4 font-bold'> <i className='font-normal'>Price :</i> ₹ {singlepr.price}</p>
+                <p className='text-lg text-black break-words my-4 font-bold'> <i className='font-normal'>Price :</i> ₹ {Math.ceil(singlepr.price)}</p>
                 
                 <div className='raiting py-7 text-yellow-500 flex items-center text-3xl'>      
                   {Array(Math.ceil(rate)).fill(null).map((_,i)=>{
                       return <StarFilled className='mx-1' key={i}/>
-
                     })
                   }
                 </div>
                 
-                <button 
+             <div className='flex items-center flex-wrap gap-5'>
+               <button 
                 onClick={()=>{ addToCart(singlepr) }} 
                   className='font-bold rounded text-whiteSmoke bg-slate hover:bg-black py-3 px-10 text-base my-10 flex items-center'>
                   <IconContext.Provider value={{size:'18px'}}><BsBagHeartFill className='mr-2'/> </IconContext.Provider>
                   <span>Add to bag</span>
                 </button>
+
+                <button 
+                onClick={()=>{ addToCart(singlepr) }} 
+                  className='font-bold rounded text-whiteSmoke bg-slate hover:bg-black py-3 px-10 text-base my-10 flex items-center'>
+                  <IconContext.Provider value={{size:'18px'}}><BsHeartFill className='mr-2'/> </IconContext.Provider>
+                  <span> Wishlist</span>
+                </button>
+             </div>
                 
             </Col>
          </Row>
