@@ -56,7 +56,12 @@ function Wishlist() {
                                  </Col>
                         })
                 ):(
-                  <h1>Somthing error</h1>                    
+                  <Col className='flex justify-center items-center border-2 py-20 flex-col' span={24}>
+                  <p className='text-slate text-center font-semibold italic text-2xl'> Nothing you store 🫣</p>
+                  <Link to='/'>
+                     <button className='py-4 px-5 text-whiteSmoke bg-slate hover:bg-black mt-10 rounded'> Continue to Shopping</button>
+                  </Link>
+                </Col>                   
                 )
             }
         </Row>

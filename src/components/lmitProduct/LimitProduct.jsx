@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Card,Col,Row } from 'antd';
+import { Card,Col,Row,Spin } from 'antd';
 import {Link} from 'react-router-dom';
 
 const { Meta } = Card;
@@ -49,7 +49,11 @@ function LimitProduct({baseurl,title}) {
                                  </Col>
                         })
                 ):(
-                  <h1>Somthing error</h1>                    
+                    <div className='w-full p-10 flex justify-center items-center'>
+                            <Spin  size="large">
+                                 <div className="content" />
+                            </Spin>
+                    </div>
                 )
             }
         </Row>
