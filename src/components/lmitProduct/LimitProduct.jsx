@@ -31,7 +31,7 @@ function LimitProduct({baseurl,title}) {
                         limitProduct.map(i=>{
                             return <Col className="gutter-row"  xs={{span: 24, }} lg={{span: 6}} md={{span: 8}} key={i.id} style={{cursor:'pointer'}}> 
                                    <Link to={`/product/${i.id}`}>
-                                        <Card style={{overflow:'hidden', marginBottom:'2rem'}} 
+                                        <Card style={{overflow:'hidden', marginBottom:'2rem',textAlign:'center'}} 
                                             cover={
                                                 <div style={{ overflow: "hidden", height: "250px" , width:'100%'}}>
                                                 <img
