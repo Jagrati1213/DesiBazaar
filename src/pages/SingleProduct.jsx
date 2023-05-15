@@ -6,7 +6,7 @@ import { IconContext } from 'react-icons';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { addItems, calculatePrice } from '../reduxStore/Reducer';
+import { addItems, addToList, calculatePrice } from '../reduxStore/Reducer';
 import { toast } from 'react-hot-toast';
 
 
@@ -15,13 +15,13 @@ function SingleProduct() {
   const [singlepr, setSinglePr] = useState(null);
   const [rate, setRate] = useState(0);
 
-  // for get productId 
+  //***** For Get ProductId *****// 
   const params = useParams();
 
-  // for using additem
+  //***** For Calling AddToCart *****//
   const dispatch = useDispatch();
 
-  // fetching single product
+  //***** Fetching Single Product *****//
   const fetchSingleProduct = async()=>{
 
     await axios.get(`https://fakestoreapi.com/products/${params.producId}`)
@@ -31,17 +31,21 @@ function SingleProduct() {
      })
      .catch((err)=> console.log(err))
  }
-   useEffect(()=>{
-    fetchSingleProduct();
-   },[params]);
+   useEffect(()=> {
+       fetchSingleProduct()
+  },[params]);
 
-  //  set product to addItem
+  //***** Set Product To Bag *****//
    const addToCart = (singlepr)=>{
-     toast.success('Add to Cart')
+     toast.success('Added to Bag');
      dispatch(addItems(singlepr));
      dispatch(calculatePrice());
-
    }
+
+  //***** Set Product In List *****//
+  const addToWlist = (singlepr)=>{
+    dispatch(addToList(singlepr));
+  }
 
   return (
     <main className='mt-[90px] w-full min-h-screen py-[4rem]'>
@@ -86,8 +90,8 @@ function SingleProduct() {
                 </button>
 
                 <button 
-                onClick={()=>{ addToCart(singlepr) }} 
-                  className='font-bold rounded text-whiteSmoke bg-slate hover:bg-black py-3 px-10 text-base my-10 flex items-center'>
+                onClick={()=>{ addToWlist(singlepr) }} 
+                  className='font-bold rounded text-slate hover:border-black border border-zinc-400 py-3 px-10 text-base my-10 flex items-center'>
                   <IconContext.Provider value={{size:'18px'}}><BsHeartFill className='mr-2'/> </IconContext.Provider>
                   <span> Wishlist</span>
                 </button>
