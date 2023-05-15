@@ -2,39 +2,39 @@ import { Col,Row, } from 'antd';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
-import { decrementItems, incrementItems } from '../reduxStore/Reducer';
+import { calculatePrice, decrementItems, incrementItems } from '../reduxStore/Reducer';
 
 
 function Cart() {
 
   // **** Get productReducre -> store *** //
-  const cartItem = useSelector(state => state.product);
+  const {products, total, subTotal, delivery} = useSelector(state => state.product);
 
   // **** Get Methods -> productReducre ***//
   const dispatch = useDispatch();
 
   // **** Decrement the Items **** //
   const decrement = (itemId) =>{
-       console.log(itemId);
       dispatch(decrementItems(itemId))
+      dispatch(calculatePrice());
   }
 
   // **** Increment the Items **** //
   const increment = (itemId) =>{
-    console.log(itemId);
-   dispatch(incrementItems(itemId))
+   dispatch(incrementItems(itemId));
+   dispatch(calculatePrice());
 }
 
   return (
     <main className='mt-[90px] p-10'>
       <Row className='w-full mx-auto'>
-        { cartItem.products.length > 0?
+        { products.length > 0?
           (
           <>
             <Col span={16} className='p-8 border-r-2'>
               <ul className=' overflow-y-scroll'>
                  {
-                  cartItem.products.map((item,index)=>{
+                  products.map((item,index)=>{
                     return(
                     <li className='flex my-10 justify-between' key={index}>
 
@@ -69,17 +69,17 @@ function Cart() {
 
                           <div className="item_total mt-4 overflow-hidden py-2 flex justify-between">
                             <div className="itemtotal-title">Item Total</div>
-                            <div className="itemtotal-value">00</div>
+                            <div className="itemtotal-value">{subTotal}</div>
                           </div>
 
                           <div className="delivertotal my-2 overflow-hidden py-2 flex justify-between">
                             <div className="delivertotal-title">Delivery Charge</div>
-                            <div className="delivertotal-value">00</div>
+                            <div className="delivertotal-value">{delivery}</div>
                           </div>
 
                           <div className="total border-t-2 border-black my-4 overflow-hidden py-2 flex justify-between pt-4">
                             <div className="total-title"> Grand Total</div>
-                            <div className="total-value">00</div>
+                            <div className="total-value">{total}</div>
                           </div>
 
                           <div className="checkout w-full bg-slate hover:bg-black text-whiteSmoke py-4 px-8 text-center rounded">
