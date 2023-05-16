@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaShoppingBag, FaHeart } from 'react-icons/fa';
 import { GoPerson } from 'react-icons/go';
 import { IconContext } from 'react-icons';
@@ -8,8 +8,12 @@ import { useSelector } from 'react-redux';
 
 function MenuList({navbarOpen}) {
 
+    //____ Get the Products from productSlice
     const {products} = useSelector(state => state.product);
+        
+    //____ Set the quantity to top
     const [count, setCount] = useState(0);
+
     useEffect(()=>{
         let bagCount = 0;
         products.map((item)=>{
@@ -31,7 +35,7 @@ function MenuList({navbarOpen}) {
             </li>
             <li className='md:my-0 my-4'>
                 <IconContext.Provider value={{size:'18px'}}>
-                    <Link to="/signin" className="block p-2 bg-slate text-whiteSmoke rounded-full"> 
+                    <Link to='/profile' className="block p-2 bg-slate text-whiteSmoke rounded-full"> 
                       <GoPerson/>
                     </Link>
                 </IconContext.Provider>           
