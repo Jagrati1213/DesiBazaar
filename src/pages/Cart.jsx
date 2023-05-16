@@ -2,7 +2,7 @@ import { Col,Row, } from 'antd';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
-import { calculatePrice, decrementItems, incrementItems } from '../reduxStore/Reducer';
+import { calculatePrice, decrementItems, incrementItems } from '../reduxStore/ProductReducer';
 
 
 function Cart() {
@@ -102,7 +102,7 @@ function Cart() {
           </Col>
         )
       }
-    </Row>
+      </Row>
         
     </main>
   )

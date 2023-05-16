@@ -8,7 +8,7 @@ const initialState = {
     delivery: 0,
     listArr: []
 }
-export const productReducre = createSlice({
+export const productSlice = createSlice({
     name: "cart",
     initialState,
     reducers: {
@@ -89,8 +89,8 @@ export const productReducre = createSlice({
 
     }
 })
-export const { addItems, decrementItems, incrementItems, calculatePrice, addToList } = productReducre.actions;
-export default productReducre.reducer
+export const { addItems, decrementItems, incrementItems, calculatePrice, addToList } = productSlice.actions;
+export default productSlice.reducer
 
 
 

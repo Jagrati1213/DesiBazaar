@@ -6,7 +6,7 @@ import { IconContext } from 'react-icons';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { addItems, addToList, calculatePrice } from '../reduxStore/Reducer';
+import { addItems, addToList, calculatePrice } from '../reduxStore/ProductReducer';
 
 
 function SingleProduct() {

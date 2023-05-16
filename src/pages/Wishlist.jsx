@@ -2,7 +2,7 @@ import React from 'react';
 import { Card,Col,Row } from 'antd';
 import {Link} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItems, calculatePrice } from '../reduxStore/Reducer';
+import { addItems, calculatePrice } from '../reduxStore/ProductReducer';
 
 const { Meta } = Card;
 
