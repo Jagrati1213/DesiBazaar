@@ -1,10 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-hot-toast';
 
+/*
+* create local storage
+* set User Details not delete
+*/
+const users = sessionStorage.getItem('users') !== null ? JSON.parse(sessionStorage.getItem('users')) : [];
+
 const initialState = {
-    userDetails: [],
+    userDetails: users,
     isUser: false,
 }
+
 const userDetailsSlice = createSlice({
     name: 'users',
     initialState,
@@ -12,7 +19,8 @@ const userDetailsSlice = createSlice({
 
         logIn: (state, action) => {
             const user = action.payload;
-            const IsLoggin = state.userDetails.find((i) => i.username === user.username && i.password === user.password);
+            console.log('log ', state.userDetails.username, user.username);
+            const IsLoggin = (state.userDetails.username === user.username && state.userDetails.password === user.password);
 
             if (IsLoggin) {
                 toast.success(`Welcome Back ${user.username}`);
@@ -23,18 +31,24 @@ const userDetailsSlice = createSlice({
             }
         },
 
+        logOut: (state, action) => {
+            state.isUser = false;
+        },
+
         sigIn: (state, action) => {
 
             const user = action.payload;
-            const IsLoggin = state.userDetails.find((i) => i.username === user.username && i.password === user.password);
+            console.log('Sign ', state.userDetails.username, user.username);
+
+            const IsLoggin = (state.userDetails.username === user.username && state.userDetails.password === user.password);
             if (IsLoggin) {
                 toast.error('User already exit');
                 state.isUser = false;
 
             } else {
                 toast.success(`Welcom ${user.username}`);
-                state.userDetails.push(user);
                 state.isUser = true;
+                sessionStorage.setItem('users', JSON.stringify(user));
             }
         },
 
