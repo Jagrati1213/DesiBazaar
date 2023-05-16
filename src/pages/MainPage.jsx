@@ -7,6 +7,8 @@ import SingleProduct from './SingleProduct';
 import Cart from './Cart';
 import { Toaster } from "react-hot-toast";
 import Wishlist from './Wishlist';
+import Login from '../authentication/Login';
+import SignIn from '../authentication/SignIn';
 
 function MainPage() {
   return (
@@ -19,6 +21,8 @@ function MainPage() {
         <Route path='/product/:producId' element={<SingleProduct />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/whislist' element={<Wishlist />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/signin' element={<SignIn />} />
       </Routes>
       <Toaster/>
       </main>

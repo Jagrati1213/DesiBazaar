@@ -30,9 +30,11 @@ function MenuList({navbarOpen}) {
                 <Link to="/product" className="block py-4 px-3 text-slate hover:text-black md:p-0">Product</Link>
             </li>
             <li className='md:my-0 my-4'>
-                <Link tp="/" className="block p-2 bg-slate text-whiteSmoke rounded-full"> 
-                    <IconContext.Provider value={{size:'18px'}}><GoPerson/></IconContext.Provider>
-                </Link>
+                <IconContext.Provider value={{size:'18px'}}>
+                    <Link to="/login" className="block p-2 bg-slate text-whiteSmoke rounded-full"> 
+                      <GoPerson/>
+                    </Link>
+                </IconContext.Provider>           
             </li>
             <li className='md:my-0 my-4'>
                 <IconContext.Provider value={{size:'18px'}}>
