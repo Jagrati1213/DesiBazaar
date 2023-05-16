@@ -31,11 +31,12 @@ function MenuList({navbarOpen}) {
             </li>
             <li className='md:my-0 my-4'>
                 <IconContext.Provider value={{size:'18px'}}>
-                    <Link to="/login" className="block p-2 bg-slate text-whiteSmoke rounded-full"> 
+                    <Link to="/signin" className="block p-2 bg-slate text-whiteSmoke rounded-full"> 
                       <GoPerson/>
                     </Link>
                 </IconContext.Provider>           
             </li>
+
             <li className='md:my-0 my-4'>
                 <IconContext.Provider value={{size:'18px'}}>
                     <Link to="/whislist" className="block p-2 bg-slate text-whiteSmoke rounded-full">
