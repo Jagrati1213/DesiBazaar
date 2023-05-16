@@ -9,6 +9,7 @@ import { Toaster } from "react-hot-toast";
 import Wishlist from './Wishlist';
 import Login from '../authentication/Login';
 import SignIn from '../authentication/SignIn';
+import Profile from './Profile';
 
 function MainPage() {
   return (
@@ -23,6 +24,7 @@ function MainPage() {
         <Route path='/whislist' element={<Wishlist />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signin' element={<SignIn />} />
+        <Route path='/profile' element={<Profile />} />
       </Routes>
       <Toaster/>
       </main>
