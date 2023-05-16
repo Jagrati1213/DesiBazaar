@@ -5,8 +5,9 @@ import { BsBagHeartFill, BsHeartFill} from "react-icons/bs";
 import { IconContext } from 'react-icons';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addItems, addToList, calculatePrice } from '../reduxStore/ProductReducer';
+import { toast } from 'react-hot-toast';
 
 
 function SingleProduct() {
@@ -14,6 +15,9 @@ function SingleProduct() {
   const [singlepr, setSinglePr] = useState(null);
   const [rate, setRate] = useState(0);
 
+  //____ check is user loggin or not
+  const { isUser } = useSelector(state => state.user);
+  
   //_____ For Get ProductId 
   const params = useParams();
 
@@ -36,13 +40,23 @@ function SingleProduct() {
 
   //_____ Set Product To Bag 
    const addToCart = (singlepr)=>{
-     dispatch(addItems(singlepr));
-     dispatch(calculatePrice());
+    if(isUser){
+       dispatch(addItems(singlepr));
+      dispatch(calculatePrice());
+    }
+    else{
+      toast.error('Create Account..')
+    }
+    
    }
 
   //_____ Set Product In wishList
   const addToWlist = (singlepr)=>{
-    dispatch(addToList(singlepr));
+    if(isUser){
+        dispatch(addToList(singlepr));
+    }else{
+      toast.error('Create Account..');
+    }
   }
 
   return (
