@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Home } from './Home';
 import { Product } from './Product';
@@ -9,7 +9,6 @@ import { Toaster } from "react-hot-toast";
 import Wishlist from './Wishlist';
 import Login from '../authentication/Login';
 import SignIn from '../authentication/SignIn';
-import Profile from './Profile';
 
 function MainPage() {
   return (
@@ -24,7 +23,8 @@ function MainPage() {
         <Route path='/whislist' element={<Wishlist />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signin' element={<SignIn />} />
-        <Route path='/profile' element={<Profile />} />
+        <Route path='*' element='404 Page is not found' />
+        
       </Routes>
       <Toaster/>
       </main>
