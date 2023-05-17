@@ -2,14 +2,15 @@ import { createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-hot-toast';
 
 /*
-* create local storage
-* set User Details not delete
+* create session storage
+* for set User Details &userStatus
 */
-const users = sessionStorage.getItem('users') !== null ? JSON.parse(sessionStorage.getItem('users')) : [];
+const storage = sessionStorage.getItem('userDetails') !== null ? JSON.parse(sessionStorage.getItem('userDetails')) : [];
+const islogged = sessionStorage.getItem('userDetails') !== null ? JSON.parse(sessionStorage.getItem('islogged')) : false;
 
 const initialState = {
-    userDetails: users,
-    isUser: false,
+    userDetails: storage,
+    isLogged: islogged,
 }
 
 const userDetailsSlice = createSlice({
@@ -18,42 +19,52 @@ const userDetailsSlice = createSlice({
     reducers: {
 
         logIn: (state, action) => {
-            const user = action.payload;
-            console.log('log ', state.userDetails.username, user.username);
-            const IsLoggin = (state.userDetails.username === user.username && state.userDetails.password === user.password);
 
+            const user = action.payload;
+            const IsLoggin = state.userDetails.find((i) => (i.user.username === user.username) && (i.user.password === user.password));
+
+            // already exit in user Array
             if (IsLoggin) {
-                toast.success(`Welcome Back ${user.username}`);
-                state.isUser = true;
+                state.userDetails.forEach((ele) => {
+                    if (ele.user.username === user.username && ele.user.password === user.password) {
+                        toast.success(`Welcome Back ${user.username}`);
+                        ele.isUser = true;
+                        state.isLogged = ele.isUser;
+                        sessionStorage.setItem('islogged', JSON.stringify(state.isLogged));
+                    }
+                    else {
+                        ele.isUser = false;
+                    }
+                })
+                sessionStorage.setItem('userDetails', JSON.stringify(state.userDetails))
             } else {
-                toast.error('Oops!! Create account first');
-                state.isUser = false;
+                toast.error('user not found');
+                state.isLogged = false;
             }
+
         },
 
         logOut: (state, action) => {
-            state.isUser = false;
+            state.isLogged = false
+            sessionStorage.setItem('islogged', JSON.stringify(state.isLogged));
         },
 
         sigIn: (state, action) => {
 
             const user = action.payload;
-            console.log('Sign ', state.userDetails.username, user.username);
+            const IsLoggin = state.userDetails.find((i) => (i.user.username === user.username) && (i.user.password === user.password));
 
-            const IsLoggin = (state.userDetails.username === user.username && state.userDetails.password === user.password);
             if (IsLoggin) {
                 toast.error('User already exit');
-                state.isUser = false;
-
             } else {
                 toast.success(`Welcom ${user.username}`);
-                state.isUser = true;
-                sessionStorage.setItem('users', JSON.stringify(user));
+                state.userDetails.push({ user, isUser: false });
+                sessionStorage.setItem('userDetails', JSON.stringify(state.userDetails))
             }
         },
 
     }
 });
 
-export const { sigIn, logIn } = userDetailsSlice.actions;
+export const { sigIn, logIn, logOut } = userDetailsSlice.actions;
 export default userDetailsSlice.reducer;
