@@ -1,18 +1,37 @@
-import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import React, { useState,useEffect, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from "react-router-dom";
+import { sigIn } from '../reduxStore/AuthReducer';
 
 function SignIn() {
 
-    const [inputfields, setInputFields] = useState({
-        name:'',
-        value:'',
+    //_____ Make userObject
+     const [name,setName]= useState('');
+     const [username,setUserName]= useState('');
+     const [password,setPassword]= useState('');
+
+    //_____ Get userDetails methods from reducer
+    const dispatch = useDispatch();
+
+    //_____ Store User Details
+    const handlerSubmit = useCallback((event)=>{
+
+        event.preventDefault();
+        if( name == '' && username =='', password ==''){
+           alert('fill all feilds') 
+        }else{
+            dispatch(sigIn({name:name.trim(),username:username.trim(),password:password.trim()}));
+            setName('');
+            setUserName('');
+            setPassword(''); 
+        }
     });
-    const submitHandler = (event)=> {
-      event.preventDefault()
-      console.log('click');
-    }
+
+   //____ Recall the reducers 
+    useEffect(()=>{},[dispatch]);
+
   return ( 
-  <div className="min-h-screen  flex justify-center items-center">
+    <div className="min-h-screen  flex justify-center items-center" >
         <div className="md:w-[400px] w-auto bg-white rounded-3xl mx-auto overflow-hidden shadow-xl">
 
             <div className="relative md:h-48 h-28 bg-slate rounded-bl-4xl">
@@ -24,23 +43,23 @@ function SignIn() {
             <div className="px-10 pt-4 pb-8 bg-white rounded-tr-4xl">
                     <h1 className="md:text-2xl text-xl font-semibold text-slate">Hello, Let's Connect!</h1>
                 
-                    <form className="mt-8"  onSubmit={ (e) => submitHandler(e)}>
+                    <form className="mt-8" onSubmit={handlerSubmit}>
 
                         {/* Name */}
                         <div className="relative">
-                        <input id="name" name="name" type="text" className="peer h-10 w-full border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:outline-none focus:border-rose-600" placeholder="john@doe.com" />
+                        <input value={name} id="name" name="name" type="text" className="peer h-10 w-full border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:outline-none focus:border-rose-600"  onChange={(e)=> setName(e.target.value)} />
                         <label htmlFor="name" className="absolute left-0 -top-3.5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Name</label>
                         </div>
 
                         {/* Email */}
                         <div className="relative mt-8">
-                        <input id="userName" name="userName" type="text" className="peer h-10 w-full border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:outline-none focus:border-rose-600" placeholder="john@doe.com" />
+                        <input value={username} id="userName" name="userName" type="text" className="peer h-10 w-full border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:outline-none focus:border-rose-600"  onChange={(e)=> setUserName(e.target.value)} />
                         <label htmlFor="userName" className="absolute left-0 -top-3.5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">User Name</label>
                         </div>
 
                         {/* Password */}
                         <div className="mt-8 relative">
-                        <input id="password" type="text" name="password" className="peer h-10 w-full border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:outline-none focus:border-rose-600" placeholder="Password" />
+                        <input value={password} id="password" type="text" name="password" className="peer h-10 w-full border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:outline-none focus:border-rose-600"  onChange={(e)=> setPassword(e.target.value)} />
                         <label htmlFor="password" className="absolute left-0 -top-3.5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Password</label>
                         </div>
 
