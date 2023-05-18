@@ -20,7 +20,14 @@ function SignIn() {
         if( name == '' && username =='', password ==''){
            alert('fill all feilds') 
         }else{
-            dispatch(sigIn({name:name.trim(),username:username.trim(),password:password.trim()}));
+            dispatch(
+                sigIn(
+                    {
+                      name:name.trim(),
+                      username:username.trim(),
+                      password:password.trim()
+                    }
+            ));
             setName('');
             setUserName('');
             setPassword(''); 

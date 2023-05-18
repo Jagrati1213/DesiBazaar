@@ -3,27 +3,44 @@ import { useDispatch,useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import { logIn } from '../reduxStore/AuthReducer';
 import Profile from '../pages/Profile';
+import { toast } from 'react-hot-toast';
 
 function Login() {
     
+    //___ get data from input 
     const [username,setUserName]= useState('');
     const [password,setPassword]= useState('');
-    const dispatch = useDispatch();
-    const { isLogged } = useSelector(state => state.user);
-    console.log(isLogged);
 
+    //____ used to call methods from reducer
+    const dispatch = useDispatch();
+    const { userExit } = useSelector(state => state.user);
+
+    //____ check the currentuser's status
+    const { userDetails } = useSelector(state => state.user);
+    const currentUserIndex = userDetails.indexOf(userDetails.find((i) => i.isUser === true));
 
     const handlerSubmit = useCallback((event) =>{
-       event.preventDefault();
-       dispatch(logIn({username:username.trim(),password:password.trim()}));
-       setUserName('');
-       setPassword('');
+        event.preventDefault();
+
+        //check is fields empty or not
+        if(username ==='' && password ===''){
+            toast.error('fill all fields')
+        }else{
+            dispatch(
+                logIn(
+                    { username:username.trim(),
+                      password:password.trim()
+                    })
+                );
+            setUserName('');
+            setPassword('');
+        }
     });
 
-    useEffect(()=>{},[isLogged]);
+    useEffect(()=>{},[userExit]);
   
   return ( 
-    isLogged ?
+    userExit ?
     <Profile/> :  
     (<div className="min-h-screen  flex justify-center items-center">
         <div className="md:w-[400px] w-auto bg-white rounded-3xl mx-auto overflow-hidden shadow-xl">
