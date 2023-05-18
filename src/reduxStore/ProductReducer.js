@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-hot-toast';
+import { useSelector } from 'react-redux';
 
 const initialState = {
     products: [],
@@ -74,14 +75,14 @@ export const productSlice = createSlice({
                 // already exit in cart
                 state.products.forEach((ele) => {
                     if (ele.item.id === item.id) {
-                        toast.success('Already exit in list')
+                        toast.success('Already exit in list');
                     }
                 });
             }
             else {
                 // Added to Cart;
                 state.listArr.push({ item, quantity: 1 });
-                toast.success('Added to list')
+                toast.success('Added to list');
 
             }
         },
