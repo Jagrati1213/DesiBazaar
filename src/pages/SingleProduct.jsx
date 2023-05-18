@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Col, Row,Image } from 'antd';
 import { StarFilled } from "@ant-design/icons";
 import { BsBagHeartFill, BsHeartFill} from "react-icons/bs";
@@ -8,6 +8,7 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItems, addToList, calculatePrice } from '../reduxStore/ProductReducer';
 import { toast } from 'react-hot-toast';
+import { userCart, userWishList } from '../reduxStore/AuthReducer';
 
 
 function SingleProduct() {
@@ -16,7 +17,11 @@ function SingleProduct() {
   const [rate, setRate] = useState(0);
 
   //____ check is user loggin or not
-  const { isUser } = useSelector(state => state.user);
+  const { userExit } = useSelector(state => state.user);
+
+  //_____ get carts, and wishlist carts
+  const productDetails = useSelector(state => state.product.products);
+  const listDetails = useSelector(state => state.product.listArr);
   
   //_____ For Get ProductId 
   const params = useParams();
@@ -34,30 +39,40 @@ function SingleProduct() {
      })
      .catch((err)=> console.log(err))
  }
-   useEffect(()=> {
+   
+ useEffect(()=> {
        fetchSingleProduct()
   },[params]);
 
   //_____ Set Product To Bag 
-   const addToCart = (singlepr)=>{
-    if(isUser){
+   const addToCart = useCallback((singlepr)=>{
+
+    if(userExit){
+
        dispatch(addItems(singlepr));
-      dispatch(calculatePrice());
+       dispatch( userCart(productDetails));
+       dispatch(calculatePrice());
     }
     else{
-      toast.error('Create Account..')
-    }
-    
-   }
-
-  //_____ Set Product In wishList
-  const addToWlist = (singlepr)=>{
-    if(isUser){
-        dispatch(addToList(singlepr));
-    }else{
       toast.error('Create Account..');
     }
-  }
+    
+   })
+
+  //_____ Set Product In wishList
+  const addToWlist = useCallback((singlepr)=>{
+  
+    if(userExit){
+        dispatch(addToList(singlepr));
+        dispatch( userWishList(listDetails));
+    }
+    else{
+      toast.error('Create Account..');
+    }
+  })
+
+
+useEffect(()=>{},[dispatch]);
 
   return (
     <main className='mt-[90px] w-full min-h-screen py-[4rem]'>
