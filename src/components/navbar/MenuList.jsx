@@ -8,19 +8,29 @@ import { useSelector } from 'react-redux';
 
 function MenuList({navbarOpen}) {
 
-    //____ Get the Products from productSlice
-    const {products} = useSelector(state => state.product);
-        
-    //____ Set the quantity to top
+    const { userDetails } = useSelector(state => state.user);
+    
+    //____ Get the currentuser's index
+    const currentUserIndex = userDetails.indexOf(userDetails.find((i) => i.isUser === true));
+
+    //____ Set the quantity as header
     const [count, setCount] = useState(0);
 
     useEffect(()=>{
+       
         let bagCount = 0;
-        products.map((item)=>{
-            bagCount += Number(item.quantity);
-        })
+        
+        // check is user's exit or not
+        if(userDetails[currentUserIndex]?.isUser === true){
+            // calculate all item's quantity
+            userDetails[currentUserIndex].userCart.map((item)=>{
+               bagCount += Number(item?.quantity);
+           }) 
+        }else{
+            bagCount = 0;
+        }
         setCount(bagCount);
-    },[products]);
+    },[userDetails]);
 
   return (
     <>
