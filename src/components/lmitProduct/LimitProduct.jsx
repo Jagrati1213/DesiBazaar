@@ -8,8 +8,8 @@ const { Meta } = Card;
 function LimitProduct({baseurl,title}) {
 
     const [limitProduct, setLimitProduct] = useState(null);
-
- useEffect(()=>{
+    
+    //____ fetching fakestore products
     const fetchingData = async()=>{
         try{
             const { data } = await axios.get(baseurl);
@@ -18,8 +18,10 @@ function LimitProduct({baseurl,title}) {
          console.log(err);
         }
     }
+
+ useEffect(()=>{
     fetchingData(); 
- },[]);
+ },[baseurl]);
 
   return (
     <main className='p-4 md:p-10 w-full py-10 site-card-wrapper'>
@@ -40,9 +42,7 @@ function LimitProduct({baseurl,title}) {
                                                 src={i.image}
                                                 />
                                             </div>
-                                            }
-                                            actions={[]}
-                                            >
+                                            }>
                                         <Meta title={i.title} description={`₹${Math.ceil(i.price)}`}/>
                                         </Card>
                                    </Link>
