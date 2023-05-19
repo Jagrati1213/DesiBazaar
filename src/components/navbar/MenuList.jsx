@@ -23,7 +23,7 @@ function MenuList({navbarOpen}) {
         // check is user's exit or not
         if(userDetails[currentUserIndex]?.isUser === true){
             // calculate all item's quantity
-            userDetails[currentUserIndex].userCart.map((item)=>{
+            userDetails[currentUserIndex]?.userCart.map((item)=>{
                bagCount += Number(item?.quantity);
            }) 
         }else{
