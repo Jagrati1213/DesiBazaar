@@ -5,7 +5,6 @@ import { logIn } from '../reduxStore/AuthReducer';
 import Profile from '../pages/Profile';
 import { toast } from 'react-hot-toast';
 import { Input } from 'antd';
-import { EyeTwoTone,EyeInvisibleOutlined } from "@ant-design/icons";
 
 function Login() {
     
