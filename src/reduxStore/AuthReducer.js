@@ -80,6 +80,7 @@ const userDetailsSlice = createSlice({
                 })
             }
             else {
+                toast.success('Added to cart')
                 state.userDetails[currentUserIndex].userCart.push({ cartItem, quantity: 1 });
             }
             // reset storage
