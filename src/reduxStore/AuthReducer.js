@@ -110,11 +110,29 @@ const userDetailsSlice = createSlice({
         },
 
         removeCartItem: (state, action) => {
+            const itemId = action.payload;
+            const currentUserIndex = state.userDetails.indexOf(state.userDetails.find((i) => i.isUser === true));
+            const isItemExit = state.userDetails[currentUserIndex].userCart.find((i) => i.cartItem.id === itemId);
+            const itemIndex = state.userDetails[currentUserIndex].userCart.indexOf(isItemExit);
+
+            // remove item from cart array
+            state.userDetails[currentUserIndex].userCart.splice(itemIndex, 1);
+            // reset storage
+            sessionStorage.setItem('userDetails', JSON.stringify(state.userDetails))
 
         },
 
         removeListItem: (state, action) => {
 
+            const itemId = action.payload;
+            const currentUserIndex = state.userDetails.indexOf(state.userDetails.find((i) => i.isUser === true));
+            const isItemExit = state.userDetails[currentUserIndex].userWish.find((i) => i.cartItem.id === itemId);
+            const itemIndex = state.userDetails[currentUserIndex].userWish.indexOf(isItemExit);
+
+            // remove item from cart array
+            state.userDetails[currentUserIndex].userWish.splice(itemIndex, 1);
+            // reset storage
+            sessionStorage.setItem('userDetails', JSON.stringify(state.userDetails))
         },
 
         calculatePrice: (state) => {
@@ -131,6 +149,34 @@ const userDetailsSlice = createSlice({
             sessionStorage.setItem('userDetails', JSON.stringify(state.userDetails))
         },
 
+        userDecrementItems: (state, action) => {
+            const itemId = action.payload;
+            const currentUserIndex = state.userDetails.indexOf(state.userDetails.find((i) => i.isUser === true));
+
+            state.userDetails[currentUserIndex].userCart.forEach((ele) => {
+                console.log(ele.quantity);
+                if (ele.cartItem.id === itemId && ele.quantity > 1) {
+                    return ele.quantity -= 1;
+                } else {
+                    return ele.quantity = ele.quantity;
+                }
+            })
+        },
+
+        userIncrementItems: (state, action) => {
+            const itemId = action.payload;
+            const currentUserIndex = state.userDetails.indexOf(state.userDetails.find((i) => i.isUser === true));
+
+            state.userDetails[currentUserIndex].userCart.forEach((ele) => {
+                if (ele.cartItem.id === itemId) {
+                    return ele.quantity += 1;
+
+                } else {
+                    return ele.quantity = ele.quantity;
+                }
+            })
+        },
+
     }
 });
 
@@ -142,5 +188,7 @@ export const {
     userWishList,
     removeCartItem,
     removeListItem,
-    calculatePrice } = userDetailsSlice.actions;
+    calculatePrice,
+    userDecrementItems,
+    userIncrementItems } = userDetailsSlice.actions;
 export default userDetailsSlice.reducer;
