@@ -6,9 +6,9 @@ import { IconContext } from 'react-icons';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItems, addToList, calculatePrice } from '../reduxStore/ProductReducer';
+// import { addItems, addToList, calculatePrice } from '../reduxStore/ProductReducer';
 import { toast } from 'react-hot-toast';
-import { userCart, userWishList } from '../reduxStore/AuthReducer';
+import { calculatePrice, userCartList, userWishList } from '../reduxStore/AuthReducer';
 
 
 function SingleProduct() {
@@ -16,17 +16,18 @@ function SingleProduct() {
   const [singlepr, setSinglePr] = useState(null);
   const [rate, setRate] = useState(0);
 
-  //____ check is user loggin or not
+  //____ Check is user loggin or not
   const { userExit } = useSelector(state => state.user);
 
   //_____ get carts, and wishlist carts
-  const productDetails = useSelector(state => state.product.products);
-  const listDetails = useSelector(state => state.product.listArr);
+  /* const productDetails = useSelector(state => state.product.products);
+     const listDetails = useSelector(state => state.product.li stArr);
+  */
   
-  //_____ For Get ProductId 
+  //_____ For get productId 
   const params = useParams();
 
-  //_____ For Calling AddToCart
+  //_____ For calling reducer's methods
   const dispatch = useDispatch();
 
   //_____ Fetching Single Product 
@@ -44,35 +45,30 @@ function SingleProduct() {
        fetchSingleProduct()
   },[params]);
 
-  //_____ Set Product To Bag 
+  //_____ Set product to bag 
    const addToCart = useCallback((singlepr)=>{
-
     if(userExit){
-
-       dispatch(addItems(singlepr));
-       dispatch( userCart(productDetails));
+      //  dispatch(addItems(singlepr));
+       dispatch( userCartList(singlepr));
        dispatch(calculatePrice());
     }
     else{
       toast.error('Create Account..');
     }
     
-   })
+   },[singlepr])
 
-  //_____ Set Product In wishList
+  //_____ Set product in wishList
   const addToWlist = useCallback((singlepr)=>{
-  
     if(userExit){
-        dispatch(addToList(singlepr));
-        dispatch( userWishList(listDetails));
-    }
-    else{
+        // dispatch(addToList(singlepr));
+        dispatch( userWishList(singlepr));
+    }else{
       toast.error('Create Account..');
     }
-  })
+  },[singlepr])
 
-
-useEffect(()=>{},[dispatch]);
+// useEffect(()=>{},[dispatch]);
 
   return (
     <main className='mt-[90px] w-full min-h-screen py-[4rem]'>
