@@ -13,7 +13,7 @@ import SignIn from '../authentication/SignIn';
 function MainPage() {
   return (
     <Router>
-    <main className='h-full min-h-screen w-full'>
+    <main className='h-full min-h-screen w-full overflow-x-hidden'>
         <Header/>
      <Routes>
         <Route index element={<Home />} />
