@@ -22,21 +22,18 @@ const userDetailsSlice = createSlice({
 
             const user = action.payload;
             const IsLoggin = state.userDetails.find((i) => (i.user.username === user.username) && (i.user.password === user.password));
+            const currentUserIndex = state.userDetails.indexOf(IsLoggin);
 
-            // already exit in user Array
+            // Check user have acc. or not
             if (IsLoggin) {
-                state.userDetails.forEach((ele) => {
-                    if (ele.user.username === user.username && ele.user.password === user.password) {
-                        toast.success(`Logging is successfully`);
-                        ele.isUser = true;
-                        state.userExit = ele.isUser;
-                        sessionStorage.setItem('userExit', JSON.stringify(state.userExit));
-                    }
-                    else {
-                        ele.isUser = false;
-                    }
-                })
-                sessionStorage.setItem('userDetails', JSON.stringify(state.userDetails))
+
+                toast.success(`Logging is successfully`);
+                state.userDetails[currentUserIndex].isUser = true;
+                state.userExit = state.userDetails[currentUserIndex].isUser;
+                sessionStorage.setItem('userExit', JSON.stringify(state.userExit));
+                // reset storage
+                sessionStorage.setItem('userDetails', JSON.stringify(state.userDetails));
+
             } else {
                 toast.error('user not found');
                 state.userExit = false;
@@ -44,12 +41,12 @@ const userDetailsSlice = createSlice({
 
         },
 
-        logOut: (state, action) => {
-
+        logOut: (state) => {
             const currentUserIndex = state.userDetails.indexOf(state.userDetails.find((i) => i.isUser === true));
             state.userDetails[currentUserIndex].isUser = false;
             state.userExit = false;
             sessionStorage.setItem('userExit', JSON.stringify(state.userExit));
+            // reset storage
             sessionStorage.setItem('userDetails', JSON.stringify(state.userDetails))
         },
 
@@ -62,30 +59,88 @@ const userDetailsSlice = createSlice({
                 toast.error('User already exit');
             } else {
                 toast.success(`SignIn successful, 🙂`);
-                state.userDetails.push({ user, isUser: false, userCart: [], userWish: [] });
+                state.userDetails.push({ user, isUser: false, userCart: [], userWish: [], total: 0, subTotal: 0, delivery: 0, });
+                // set storage
                 sessionStorage.setItem('userDetails', JSON.stringify(state.userDetails))
             }
         },
 
-        userCart: (state, action) => {
-            const cart = action.payload;
-            console.log(cart);
+        userCartList: (state, action) => {
+
+            const cartItem = action.payload;
             const currentUserIndex = state.userDetails.indexOf(state.userDetails.find((i) => i.isUser === true));
-            state.userDetails[currentUserIndex].userCart = cart
+            const isItemExit = state.userDetails[currentUserIndex].userCart.find((i) => i.cartItem.id === cartItem.id);
+
+            // check item exit or not
+            if (isItemExit) {
+                state.userDetails[currentUserIndex].userCart.forEach((ele) => {
+                    if (ele.cartItem.id === cartItem.id) {
+                        ele.quantity += 1;
+                    }
+                })
+            }
+            else {
+                state.userDetails[currentUserIndex].userCart.push({ cartItem, quantity: 1 });
+            }
+            // reset storage
             sessionStorage.setItem('userDetails', JSON.stringify(state.userDetails))
         },
 
         userWishList: (state, action) => {
-            const list = action.payload;
+
+            const cartItem = action.payload;
             const currentUserIndex = state.userDetails.indexOf(state.userDetails.find((i) => i.isUser === true));
-            state.userDetails[currentUserIndex].userWish = list;
+            const isItemExit = state.userDetails[currentUserIndex].userWish.find((i) => i.cartItem.id === cartItem.id);
+
+            // check item exit or not
+            if (isItemExit) {
+                state.userDetails[currentUserIndex].userWish.forEach((ele) => {
+                    if (ele.cartItem.id === cartItem.id) {
+                        toast.success('Already exit in list');
+                    }
+                })
+            }
+            else {
+                // Added to list;
+                state.userDetails[currentUserIndex].userWish.push({ cartItem, quantity: 1 });
+                toast.success('Added to list');
+            }
+            // reset storage
             sessionStorage.setItem('userDetails', JSON.stringify(state.userDetails))
-        }
+        },
 
+        removeCartItem: (state, action) => {
 
+        },
+
+        removeListItem: (state, action) => {
+
+        },
+
+        calculatePrice: (state) => {
+
+            let sum = 0;
+            const currentUserIndex = state.userDetails.indexOf(state.userDetails.find((i) => i.isUser === true));
+            state.userDetails[currentUserIndex].userCart.forEach((ele) =>
+                (sum += Number(Math.ceil(ele.cartItem.price)) * Number(ele.quantity))
+            );
+            state.userDetails[currentUserIndex].subTotal = sum;
+            state.userDetails[currentUserIndex].delivery = state.subTotal > 1000 ? 0 : 200;
+            state.userDetails[currentUserIndex].total = state.userDetails[currentUserIndex].subTotal + state.userDetails[currentUserIndex].delivery;
+            // reset storage
+            sessionStorage.setItem('userDetails', JSON.stringify(state.userDetails))
+        },
 
     }
 });
 
-export const { sigIn, logIn, logOut, userCart, userWishList } = userDetailsSlice.actions;
+export const {
+    sigIn,
+    logIn,
+    logOut,
+    userCartList,
+    userWishList,
+    removeCartItem,
+    removeListItem,
+    calculatePrice } = userDetailsSlice.actions;
 export default userDetailsSlice.reducer;
