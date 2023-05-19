@@ -17,9 +17,9 @@ function Header() {
         <div className='md:w-auto w-full max-w-screen-xl flex flex-wrap items-center justify-between px-4' >
 
             {/* Logo */}
-           <a href="#" className='logo_img flex items-center md:w-36 w-[7rem] h-[-webkit-fill-available]'>
+           <Link to="/" className='logo_img flex items-center md:w-36 w-[7rem] h-[-webkit-fill-available]'>
                  <img src={ELogo} alt="ajio logo" className='w-full object-cover mr-3'/>
-            </a>
+            </Link>
 
             {/* Hamburger */}
             <button type="button" className="inline-flex md:hidden items-center p-2 ml-3 text-slate rounded-lg hover:text-black cursor-pointer" onClick={() => setNavbarOpen((prev) => !prev)}>
