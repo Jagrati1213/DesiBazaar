@@ -1,14 +1,16 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { logOut } from '../reduxStore/AuthReducer';
-
 function Profile() {
     
     const dispatch = useDispatch();
-    const handleLogout = ()=>{
-         dispatch(logOut());
-    };
-    useEffect(()=>{},[dispatch]);
+
+    // user logout
+    const handleLogout = useCallback(()=>{
+        dispatch(logOut());
+    },[dispatch]);
+
+    // useEffect(()=>{},[dispatch]);
 
   return (
         <main className='w-full mt-[90px] min-h-screen flex items-center flex-col'>
