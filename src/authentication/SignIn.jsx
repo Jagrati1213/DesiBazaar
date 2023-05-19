@@ -1,7 +1,8 @@
 import React, { useState,useEffect, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { Link,Navigate } from "react-router-dom";
 import { sigIn } from '../reduxStore/AuthReducer';
+import { Input } from "antd";
 
 function SignIn() {
 
@@ -15,7 +16,6 @@ function SignIn() {
 
     //_____ Store User Details
     const handlerSubmit = useCallback((event)=>{
-
         event.preventDefault();
         if( name == '' && username =='', password ==''){
            alert('fill all feilds') 
@@ -35,7 +35,7 @@ function SignIn() {
     });
 
    //____ Recall the reducers 
-    useEffect(()=>{},[dispatch]);
+  // useEffect(()=>{},[dispatch]);
 
   return ( 
     <div className="min-h-screen  flex justify-center items-center" >
@@ -53,21 +53,18 @@ function SignIn() {
                     <form className="mt-8" onSubmit={handlerSubmit}>
 
                         {/* Name */}
-                        <div className="relative">
-                        <input value={name} id="name" name="name" type="text" className="peer h-10 w-full border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:outline-none focus:border-rose-600"  onChange={(e)=> setName(e.target.value)} />
-                        <label htmlFor="name" className="absolute left-0 -top-3.5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Name</label>
+                        <div>
+                           <Input placeholder="Enter name" onChange={(e)=> setName(e.target.value)} value={name}/>
                         </div>
 
                         {/* Email */}
-                        <div className="relative mt-8">
-                        <input value={username} id="userName" name="userName" type="text" className="peer h-10 w-full border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:outline-none focus:border-rose-600"  onChange={(e)=> setUserName(e.target.value)} />
-                        <label htmlFor="userName" className="absolute left-0 -top-3.5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">User Name</label>
+                        <div className="mt-8">
+                           <Input placeholder="Enter username" onChange={(e)=> setUserName(e.target.value)} value={username}/>
                         </div>
 
                         {/* Password */}
                         <div className="mt-8 relative">
-                        <input value={password} id="password" type="text" name="password" className="peer h-10 w-full border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:outline-none focus:border-rose-600"  onChange={(e)=> setPassword(e.target.value)} />
-                        <label htmlFor="password" className="absolute left-0 -top-3.5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Password</label>
+                           <Input.Password placeholder="Enter password"  onChange={(e)=> setPassword(e.target.value)} value={password}/>
                         </div>
 
                         {/* Submit */}
