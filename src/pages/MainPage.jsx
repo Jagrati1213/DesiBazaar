@@ -9,6 +9,8 @@ import { Toaster } from "react-hot-toast";
 import Wishlist from './Wishlist';
 import Login from '../authentication/Login';
 import SignIn from '../authentication/SignIn';
+import Checkout from './Checkout';
+import OrderSuccess from './OrderSuccess';
 
 function MainPage() {
   return (
@@ -23,8 +25,9 @@ function MainPage() {
         <Route path='/whislist' element={<Wishlist />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signin' element={<SignIn />} />
+        <Route path='/checkout' element={<Checkout />} />
+        <Route path='/success' element={<OrderSuccess />} />
         <Route path='*' element='404 Page is not found' />
-        
       </Routes>
       <Toaster/>
       </main>
