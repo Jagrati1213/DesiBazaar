@@ -1,4 +1,4 @@
-import { Col,Row, } from 'antd';
+import { Col,Row,Steps } from 'antd';
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
@@ -8,11 +8,9 @@ import { userDecrementItems, calculatePrice, userIncrementItems, removeCartItem 
 
 function Cart() {
 
-  //_____ Get productReducre -> store 
-  // const { total, subTotal, delivery} = useSelector(state => state.product);
-
+  //____ Get current User
   const { userDetails } = useSelector(state => state.user);
-  const currentUserIndex = userDetails.indexOf(userDetails.find((i) => i.isUser === true));
+  const currentUser = userDetails.find((i) => i.isUser === true);
 
   //_____ Get Methods Reducre 
   const dispatch = useDispatch();
@@ -35,19 +33,25 @@ function Cart() {
         dispatch(calculatePrice());
   },[dispatch]);
 
-// useEffect(()=>{},[dispatch]);
 
   return (
     <main className='mt-[90px] py-10'>
-      <Row className='w-full mx-auto lg:flex-row flex-col-reverse'>
-        { (userDetails[currentUserIndex]?.userCart.length > 0 && userDetails[currentUserIndex].isUser === true)?
+      <Row className='w-full mx-auto lg:flex-row flex-col'>
+        { currentUser?.userCart.length > 0?
         (
           <>
+             {/* Cart Step */}
+             <Col  xs={{span: 24 }} xl={{span: 24}} className='p-8 border-b-2 flex justify-center items-center mb-20'>
+                <div className='sm:w-3/5'>
+                    <Steps size="small"current={0}items={[{title: 'Cart',},{title: 'Payment',},{title: 'Sussess',},]}/>
+                </div>
+             </Col>
+
             {/* Cart Items */}
             <Col xs={{span: 24 }} xl={{span: 16}} className='p-8 border-r-2'>
               <ul className=' overflow-y-scroll'>
                  {
-                  userDetails[currentUserIndex]?.userCart.map((ele,index)=>{
+                   currentUser.userCart.map((ele,index)=>{
                     return(
                     <li className='flex my-10 justify-between' key={index}>
 
@@ -89,22 +93,24 @@ function Cart() {
 
                           <div className="item_total mt-4 overflow-hidden py-2 flex justify-between">
                             <div className="itemtotal-title">Item Total</div>
-                            <div className="itemtotal-value">{userDetails[currentUserIndex].subTotal}</div>
+                            <div className="itemtotal-value">{currentUser.subTotal}</div>
                           </div>
 
                           <div className="delivertotal my-2 overflow-hidden py-2 flex justify-between">
                             <div className="delivertotal-title">Delivery Charge</div>
-                            <div className="delivertotal-value">{userDetails[currentUserIndex].delivery}</div>
+                            <div className="delivertotal-value">{currentUser.delivery}</div>
                           </div>
 
                           <div className="total border-t-2 border-black my-4 overflow-hidden py-2 flex justify-between pt-4">
                             <div className="total-title"> Grand Total</div>
-                            <div className="total-value">{userDetails[currentUserIndex].total}</div>
+                            <div className="total-value">{currentUser.total}</div>
                           </div>
 
-                          <div className="checkout w-full bg-slate hover:bg-black text-whiteSmoke py-4 px-8 text-center rounded">
-                            <button className="checkout-cta">Order Now</button>
-                          </div>
+                           <Link to='/checkout'>
+                              <div className="checkout w-full bg-slate hover:bg-black text-whiteSmoke py-4 px-8 text-center rounded">
+                                 <button className="checkout-cta">Order Now</button>
+                              </div>
+                          </Link>
 
                         </div>
                     </aside>

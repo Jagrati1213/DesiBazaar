@@ -14,16 +14,16 @@ function Wishlist() {
 
     //___Find current user
     const { userDetails } = useSelector(state => state.user);
-    const currentUserIndex = userDetails.indexOf(userDetails.find((i) => i.isUser === true));
+    const currentUser = userDetails.find((i) => i.isUser === true);
 
     //_____ For Calling reducer methods 
     const dispatch = useDispatch();
 
     //_____ Set Product To Bag 
      const getItemId = useCallback((id)=>{
-        userDetails[currentUserIndex].userWish.map((i)=>{ 
+      currentUser.userWish.map((i)=>{ 
           /* find out that Id is exit in array if yes then return the element */
-            const getItem =  userDetails[currentUserIndex].userWish.find((k)=> k.cartItem.id === id);
+            const getItem =  currentUser.userWish.find((k)=> k.cartItem.id === id);
             if(getItem){
                 // dispatch(addItems(i.item));
                 dispatch(userCartList(i.cartItem));
@@ -42,9 +42,9 @@ function Wishlist() {
     <main className='mt-[90px] w-full min-h-screen p-10 overflow-hidden'>
         <Row gutter={{ xs: 8, sm: 16, lg: 18 }} justify="space-center" className='w-100 gap-6'>
           {
-            userDetails[currentUserIndex].userWish.length ?
+            currentUser.userWish.length ?
             (
-               userDetails[currentUserIndex].userWish.map((ele)=>{
+              currentUser.userWish.map((ele)=>{
                 return(
                   <Col key={ele.cartItem?.id} className="gutter-row bg-white rounded py-4 border-2 relative"  xs={{span: 24, }} lg={{span: 6}} md={{span: 8}} style={{cursor:'pointer'}}> 
 

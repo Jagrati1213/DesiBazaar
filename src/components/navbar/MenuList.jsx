@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FaShoppingBag, FaHeart } from 'react-icons/fa';
 import { GoPerson } from 'react-icons/go';
 import { IconContext } from 'react-icons';
@@ -10,26 +10,35 @@ function MenuList({navbarOpen}) {
 
     const { userDetails } = useSelector(state => state.user);
     
-    //____ Get the currentuser's index
-    const currentUserIndex = userDetails.indexOf(userDetails.find((i) => i.isUser === true));
+    //____ Get the current user
+    // const currentUserIndex = userDetails.indexOf(userDetails.find((i) => i.isUser === true));
+    const currentUser = userDetails.find((i) => i.isUser === true);
 
     //____ Set the quantity as header
     const [count, setCount] = useState(0);
+    let bagCount = 0;
 
-    useEffect(()=>{
+    // useEffect(()=>{
        
-        let bagCount = 0;
+    //     let bagCount = 0;
         
-        // check is user's exit or not
-        if(userDetails[currentUserIndex]?.isUser === true){
-            // calculate all item's quantity
-            userDetails[currentUserIndex]?.userCart.map((item)=>{
-               bagCount += Number(item?.quantity);
-           }) 
-        }else{
-            bagCount = 0;
-        }
-        setCount(bagCount);
+    //     // check is user's exit or not
+    //     if(userDetails[currentUserIndex]?.isUser === true){
+    //         // calculate all item's quantity
+    //         userDetails[currentUserIndex]?.userCart.map((item)=>{
+    //            bagCount += Number(item?.quantity);
+    //        }) 
+    //     }else{
+    //         bagCount = 0;
+    //     }
+    //     setCount(bagCount);
+    // },[userDetails]);
+
+    useEffect(()=>{  
+        currentUser?.userCart.map((item)=>{
+            bagCount += Number(item?.quantity);
+        }) 
+           setCount(bagCount);
     },[userDetails]);
 
   return (
