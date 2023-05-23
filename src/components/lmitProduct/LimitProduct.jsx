@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Card,Col,Row,Spin } from 'antd';
+import { Card,Col,Row,Avatar,Skeleton,Switch } from 'antd';
+
 import {Link} from 'react-router-dom';
 
 const { Meta } = Card;
@@ -49,11 +50,20 @@ function LimitProduct({baseurl,title}) {
                                  </Col>
                         })
                 ):(
-                    <div className='w-full p-10 flex justify-center items-center'>
-                            <Spin  size="large">
-                                 <div className="content" />
-                            </Spin>
-                    </div>
+                    Array(8).fill(null).map((_,i)=>{
+                     return <Col className="gutter-row my-3"  xs={{span: 24, }} lg={{span: 6}} md={{span: 8}} key={i.id} style={{cursor:'pointer'}}> 
+                            <Card key={i}
+                            loading={true}>
+                                <Skeleton loading={true} avatar active>
+                                    <Meta
+                                        avatar={<Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=2" />}
+                                        title="Card title"
+                                        description="This is the description"
+                                    />
+                                </Skeleton>
+                        </Card>
+                    </Col>
+                    })
                 )
             }
         </Row>

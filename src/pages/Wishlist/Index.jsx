@@ -1,10 +1,11 @@
 import React, { useCallback } from 'react';
-import { Card,Col,Row } from 'antd';
+import { Avatar, Card,Col,List,Row } from 'antd';
 import {Link} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 // import { addItems, calculatePrice } from '../reduxStore/ProductReducer';
-import { calculatePrice, removeListItem, userCartList } from '../reduxStore/AuthReducer';
+import { calculatePrice, removeListItem, userCartList } from '../../reduxStore/AuthReducer';
 import { CloseCircleFilled } from '@ant-design/icons';
+import style from './style.module.scss';
 
 const { Meta } = Card;
 
@@ -39,30 +40,27 @@ function Wishlist() {
 
 
   return (
-    <main className='mt-[90px] w-full min-h-screen p-10 overflow-hidden'>
-        <Row gutter={{ xs: 8, sm: 16, lg: 18 }} justify="space-center" className='w-100 gap-6'>
+    <main className='mt-[90px] p-4 md:p-10 w-full min-h-screen'>
+        <Row gutter={[16,16]} justify="space-center" className='xl:justify-start justify-center'>
           {
-            currentUser.userWish.length ?
+            currentUser.userWish.length?
             (
               currentUser.userWish.map((ele)=>{
                 return(
-                  <Col key={ele.cartItem?.id} className="gutter-row bg-white rounded py-4 border-2 relative"  xs={{span: 24, }} lg={{span: 6}} md={{span: 8}} style={{cursor:'pointer'}}> 
+                  <Col xl={{span: 5}} md={{span:  8}} xs={{span: 24, }} key={ele.cartItem?.id} className={`${style.wishCart} gutter-row rounded py-4 relative`}> 
 
                         <span className='text-zinc-400 hover:text-slate absolute right-2 top-0 z-30 text-2xl' 
                               onClick={()=> deleteList(ele.cartItem?.id)}>
                                 <CloseCircleFilled />
                         </span>
                         <Link to={`/product/${ele.cartItem.id}`}>
-                          <Card style={{overflow:'hidden', marginBottom:'2rem', textAlign:'center', boxShadow:'none', border:'none'}} 
-                                cover={
-                              <div style={{ overflow: "hidden", height: "250px" , width:'100%'}}>
-                                  <img alt="item"
-                                        style={{width:'100%',objectFit:'contain',height:'100%',padding:'12px' }}
-                                        src={ele.cartItem.image}
-                                    />
+                        <Card 
+                              cover={ 
+                                <div>
+                                   <img alt="item" src={ele.cartItem.image}/> 
                                 </div>
-                              }>
-                              <Meta title={'hello'} description={`₹${Math.ceil(ele.cartItem.price)}`}/>
+                                  }>
+                              <Meta title={ele.cartItem.title} description={`₹${Math.ceil(ele.cartItem.price)}`}/>
                             </Card>
 
                         </Link>
@@ -74,12 +72,21 @@ function Wishlist() {
                })
             ):
             (
-              <Col className='flex justify-center items-center border-2 py-20 flex-col mx-auto' span={16}>
-                <p className='text-slate text-center font-semibold italic text-2xl'> Nothing you store 🫣</p>
-                  <Link to='/'>
-                    <button className='py-4 px-5 text-slate border-b-2 border-slate hover:text-black mt-10'> Continue to Shopping</button>
-                  </Link>
-              </Col>
+              <div className='p-10 w-[90%] px-10 rounded mx-auto'>
+              <List
+                  itemLayout="horizontal"
+                  dataSource={currentUser.userOrder}
+                  renderItem={(item)=>
+                      (
+                      <List.Item>
+                          <List.Item.Meta
+                              avatar={<Avatar src={item.cartItem.image} />}
+                              title={item.cartItem.title}
+                              description={`${Math.ceil(item.cartItem.price)}`}
+                          />
+                      </List.Item>
+                  )}/> 
+          </div>
             )
           }
         </Row>

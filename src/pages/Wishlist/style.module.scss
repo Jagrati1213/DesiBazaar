@@ -1,0 +1,30 @@
+.wishCart{
+
+    background-color: white;
+    margin: 0 1rem;
+    cursor: pointer;
+    :global(.ant-card-bordered){
+        overflow:hidden;
+        text-align:center;
+        box-shadow:none;
+        border:none;
+        &:hover{
+            opacity: 0.8;
+        }
+    }
+    :global(.ant-card-cover)> *{
+          height: 250px;
+          width: 100%;
+          overflow: hidden;
+          @media only screen and (max-width:668px) {
+            height: 150px;
+          }
+        img{
+            width: 100%;
+            object-fit:contain;
+            height:100%;
+            padding:0px;
+        }
+    }
+    
+}

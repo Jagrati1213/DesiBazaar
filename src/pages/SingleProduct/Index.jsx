@@ -8,7 +8,8 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 // import { addItems, addToList, calculatePrice } from '../reduxStore/ProductReducer';
 import { toast } from 'react-hot-toast';
-import { calculatePrice, userCartList, userWishList } from '../reduxStore/AuthReducer';
+import { calculatePrice, userCartList, userWishList } from '../../reduxStore/AuthReducer';
+import Style from './style.module.scss'
 
 
 function SingleProduct() {
@@ -71,47 +72,47 @@ function SingleProduct() {
 // useEffect(()=>{},[dispatch]);
 
   return (
-    <main className='mt-[90px] w-full min-h-screen py-[4rem]'>
+    <main className='mt-[90px] w-full py-[4rem]'>
       {
         singlepr !== null?(
-          <Row className='h-auto mx-[10rem]'>
+          <Row className='h-auto xl:mx-[10rem] mx-2'>
 
             {/* SingleProduct Image */}
-            <Col span={12} className='border-r-2 flex justify-center items-center p-4 overflow-hidden'>
-            <Image.PreviewGroup
-                preview={{
-                  onChange: (current, prev) => console.log(`current index: ${current}, prev index: ${prev}`),
-                }}>
-                <Image width={500} src={singlepr.image} className='object-cover w-full'/>
-            </Image.PreviewGroup>
+            <Col xs={{span:24,}} lg={{span:12,}} className={`${Style.image_height} lg:border-r-2 flex justify-center items-center p-4 overflow-hidden`}>
+              <Image.PreviewGroup 
+                  preview={{
+                    onChange: (current, prev) => console.log(`current index: ${current}, prev index: ${prev}`),
+                  }}>
+                  <Image width={500} src={singlepr.image}/>
+              </Image.PreviewGroup>
             </Col>
 
             {/* SingleProduct Details */}
-            <Col span={12} className='p-8'>
+            <Col xs={{span:24,}} lg={{span:12,}} className='p-8'>
                 
-                <h1 className='text-3xl text-slate font-bold uppercase'>{singlepr.title}</h1>
-                <p className='text-lg text-gray-500 break-words my-4'> {singlepr.description}</p>
-                <p className='text-lg text-black break-words my-4 font-semibold'> Category: {singlepr.category}</p>
-                <p className='text-lg text-black break-words my-4 font-bold'> <i className='font-normal'>Price :</i> ₹ {Math.ceil(singlepr.price)}</p>
+                <h1 className='lg:text-3xl text-2xl text-slate font-bold uppercase'>{singlepr.title}</h1>
+                <p className='lg:text-lg text-base text-gray-500 break-words my-4'> {singlepr.description}</p>
+                <p className='lg:text-lg text-base text-black break-words my-4 font-semibold'> Category: {singlepr.category}</p>
+                <p className='lg:text-lg text-base text-black break-words my-4 font-bold'> <i className='font-normal'>Price :</i> ₹ {Math.ceil(singlepr.price)}</p>
                 
-                <div className='raiting py-7 text-yellow-500 flex items-center text-3xl'>      
+                <div className='raiting py-2 text-yellow-500 flex items-center text-3xl'>      
                   {Array(Math.ceil(rate)).fill(null).map((_,i)=>{
-                      return <StarFilled className='mx-1' key={i}/>
+                      return <StarFilled className='mr-1' key={i}/>
                     })
                   }
                 </div>
                 
-             <div className='flex items-center flex-wrap gap-5'>
+             <div className='flex flex-wrap gap-2'>
                <button 
                 onClick={()=>{ addToCart(singlepr) }} 
-                  className='font-bold rounded text-whiteSmoke bg-slate hover:bg-black py-3 px-10 text-base my-10 flex items-center'>
+                  className='font-bold rounded text-whiteSmoke bg-slate hover:bg-black py-3 px-10  text-sm md:text-base  my-2 flex items-center'>
                   <IconContext.Provider value={{size:'18px'}}><BsBagHeartFill className='mr-2'/> </IconContext.Provider>
                   <span>Add to bag</span>
                 </button>
 
                 <button 
                 onClick={()=>{ addToWlist(singlepr) }} 
-                  className='font-bold rounded text-slate hover:border-black border border-zinc-400 py-3 px-10 text-base my-10 flex items-center'>
+                  className='font-bold rounded text-slate hover:border-black border border-zinc-400 py-3 px-10 text-sm md:text-base my-2 flex items-center'>
                   <IconContext.Provider value={{size:'18px'}}><BsHeartFill className='mr-2'/> </IconContext.Provider>
                   <span> Wishlist</span>
                 </button>

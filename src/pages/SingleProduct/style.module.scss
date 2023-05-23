@@ -1,0 +1,17 @@
+.image_height{
+
+    :global(.ant-image){
+        object-fit: contain;
+        background-color: white;
+        height: 500px;
+        padding: 2rem;
+        @media only screen and (max-width:768px) {
+            height: auto;
+        }
+        :global(.ant-image-img){
+            object-fit: contain;
+            height: 100% !important;
+        }
+    }
+
+}

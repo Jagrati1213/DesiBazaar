@@ -1,9 +1,10 @@
-import { Col,Row,Steps } from 'antd';
+import { Avatar, Col,List,Row,Steps } from 'antd';
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 // import { calculatePrice, decrementItems, incrementItems } from '../reduxStore/ProductReducer';
-import { userDecrementItems, calculatePrice, userIncrementItems, removeCartItem } from '../reduxStore/AuthReducer';
+import { userDecrementItems, calculatePrice, userIncrementItems, removeCartItem } from '../../reduxStore/AuthReducer';
+import style from './style.module.scss'
 
 
 function Cart() {
@@ -35,29 +36,29 @@ function Cart() {
 
 
   return (
-    <main className='mt-[90px] py-10'>
+    <main className='mt-[90px] py-10 min-h-screen'>
       <Row className='w-full mx-auto lg:flex-row flex-col'>
         { currentUser?.userCart.length > 0?
         (
           <>
              {/* Cart Step */}
-             <Col  xs={{span: 24 }} xl={{span: 24}} className='p-8 border-b-2 flex justify-center items-center mb-20'>
-                <div className='sm:w-3/5'>
+             <Col  xs={{span: 24 }} xl={{span: 24}} className='md:p-8 p-3 flex justify-center items-center md:mb-10 mb-2'>
+                <div className='w-[90%]'>
                     <Steps size="small"current={0}items={[{title: 'Cart',},{title: 'Payment',},{title: 'Sussess',},]}/>
                 </div>
              </Col>
 
             {/* Cart Items */}
-            <Col xs={{span: 24 }} xl={{span: 16}} className='p-8 border-r-2'>
-              <ul className=' overflow-y-scroll'>
+            <Col xs={{span: 24 }} xl={{span: 16}} className='md:px-8 px-3 lg:border-r-2'>
+              <ul className={`${style.overscroll} h-4/5 overflow-y-scroll`}>
                  {
                    currentUser.userCart.map((ele,index)=>{
                     return(
-                    <li className='flex my-10 justify-between' key={index}>
+                    <li className='flex my-10 sm:justify-between justify-start sm:flex-row flex-col' key={index}>
 
-                      <div  className='flex'>
-                          <div className='p-4 w-[200px] '>
-                            <img src={ele.cartItem?.image} alt="product " className='w-full object-cover'/>
+                      <div  className='flex sm:flex-row flex-col sm:justify-start justify-center sm:items-start items-center'>
+                          <div className='p-4 lg:w-[200px] sm:w-[160px] w-44 lg:h-[200px] sm:h-[160px] h-44 flex justify-center'>
+                            <img src={ele.cartItem?.image} alt="product " className='w-full object-contain'/>
                           </div>
 
                           <div className='p-4'>
@@ -75,10 +76,11 @@ function Cart() {
                                 </p>
                           </div>
                       </div>
-                       <div className='p-4 flex justify-center items-center text-lg font-medium'>
-                           <button className='py-1 px-4 rounded text-whiteSmoke bg-slate' onClick={()=> decrement(ele.cartItem?.id)}>-</button>
+
+                       <div className='p-4 flex justify-center items-baseline md:text-lg font-medium w-auto'>
+                           <button className='py-0 px-2 rounded text-whiteSmoke bg-slate' onClick={()=> decrement(ele.cartItem?.id)}>-</button>
                            <span className='text-base text-center mx-4'>{ele?.quantity}</span>
-                           <button className='py-1 px-4 rounded text-whiteSmoke bg-slate' onClick={()=> increment(ele.cartItem?.id)}>+</button>
+                           <button className='py-0 px-2 rounded text-whiteSmoke bg-slate' onClick={()=> increment(ele.cartItem?.id)}>+</button>
                       </div>
                   </li>)
                   })
@@ -87,7 +89,7 @@ function Cart() {
             </Col>
 
             {/* Cart items total */}
-            <Col xs={{span: 24 }} xl={{span: 8}} className='p-8 flex justify-center '>
+            <Col xs={{span: 24 }} xl={{span: 8}} className='sm:p-8 p-3 flex justify-center '>
                     <aside className='rounded xl:w-[500px] w-[-webkit-fill-available]'>
                         <div className=" bg-zinc-200 border p-6 w-auto text-[18px]">
 
@@ -118,12 +120,21 @@ function Cart() {
           </>
         ):
         (
-          <Col className='flex justify-center items-center border-2 py-20 flex-col mx-auto' span={16}>
-            <p className='text-slate text-center font-semibold italic text-2xl'> Your Bag is too Light</p>
-            <Link to='/'>
-               <button className='py-4 px-5 text-slate border-b-2 border-slate hover:text-black mt-10'> Continue to Shopping</button>
-            </Link>
-          </Col>
+          <div className='p-10 w-[90%] px-10 rounded mx-auto'>
+          <List
+              itemLayout="horizontal"
+              dataSource={currentUser.userOrder}
+              renderItem={(item)=>
+                  (
+                  <List.Item>
+                      <List.Item.Meta
+                          avatar={<Avatar src={item.cartItem.image} />}
+                          title={item.cartItem.title}
+                          description={`${Math.ceil(item.cartItem.price)}`}
+                      />
+                  </List.Item>
+              )}/> 
+      </div>
         )
       }
       </Row>
