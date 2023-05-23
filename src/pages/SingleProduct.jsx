@@ -90,11 +90,8 @@ function SingleProduct() {
             <Col span={12} className='p-8'>
                 
                 <h1 className='text-3xl text-slate font-bold uppercase'>{singlepr.title}</h1>
-
                 <p className='text-lg text-gray-500 break-words my-4'> {singlepr.description}</p>
-
                 <p className='text-lg text-black break-words my-4 font-semibold'> Category: {singlepr.category}</p>
-
                 <p className='text-lg text-black break-words my-4 font-bold'> <i className='font-normal'>Price :</i> ₹ {Math.ceil(singlepr.price)}</p>
                 
                 <div className='raiting py-7 text-yellow-500 flex items-center text-3xl'>      
