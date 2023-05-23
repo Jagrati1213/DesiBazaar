@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Home } from './Home';
 import { Product } from './Product';
@@ -11,6 +11,7 @@ import Login from '../authentication/Login';
 import SignIn from '../authentication/SignIn';
 import Checkout from './Checkout';
 import OrderSuccess from './OrderSuccess';
+import Footer from '../components/footer/Footer';
 
 function MainPage() {
   return (
@@ -30,6 +31,7 @@ function MainPage() {
         <Route path='*' element='404 Page is not found' />
       </Routes>
       <Toaster/>
+      <Footer/>
       </main>
     </Router>
   )
