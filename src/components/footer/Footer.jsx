@@ -4,7 +4,7 @@ import {FaInstagram,FaFacebook, FaTwitter} from 'react-icons/fa'
 
 function Footer() {
   return (
-    <footer className="text-center footer bg-slate text-whiteSmoke pt-10">
+    <footer className="text-center footer bg-slate text-whiteSmoke md:pt-10 pt-2">
         <div className="w-full p-4">
             <div className="flex md:flex-row flex-col md:justify-evenly justify-center md:text-start mt-5">
                 {/* Company name  */}
@@ -14,10 +14,9 @@ function Footer() {
                 </div>
 
                  {/* Links */}
-                <FooterList title={'Solution'} linkArr={['link name','link name','link name']}/>
-                <FooterList title={'Quick Link'} linkArr={['link name','link name','link name','link name']}/>
-                <FooterList title={'Others'} linkArr={['link name','link name','link name']}/>
-                <FooterList title={'Social Media'} linkArr={[<FaInstagram/>,<FaFacebook/>,<FaTwitter/>]}/>                       
+                <FooterList title={'Solution'} linkArr={['link name','link name']}/>
+                <FooterList title={'Quick Link'} linkArr={['link name','link name']}/>
+                <FooterList title={'Others'} linkArr={['link name']}/>
             </div>
        </div>
        <div className='bg-gray-800 py-4 italic'>Let's Shop</div>
