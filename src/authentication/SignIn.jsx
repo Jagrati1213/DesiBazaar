@@ -1,6 +1,7 @@
-import React, { useState,useEffect, useCallback } from 'react';
+// import React, { useState,useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link,Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { sigIn } from '../reduxStore/AuthReducer';
 import { Input } from "antd";
 
@@ -17,7 +18,7 @@ function SignIn() {
     //_____ Store User Details
     const handlerSubmit = useCallback((event)=>{
         event.preventDefault();
-        if( name == '' && username =='', password ==''){
+        if( name === '' && username ==='' && password ===''){
            alert('fill all feilds') 
         }else{
             dispatch(
@@ -32,13 +33,13 @@ function SignIn() {
             setUserName('');
             setPassword(''); 
         }
-    });
+    },[dispatch,name,username,password]);
 
    //____ Recall the reducers 
   // useEffect(()=>{},[dispatch]);
 
   return ( 
-    <div className="min-h-screen  flex justify-center items-center" >
+    <div className=" mt-10 flex justify-center items-center" >
         <div className="md:w-[400px] w-auto bg-white rounded-3xl mx-auto overflow-hidden shadow-xl">
 
             <div className="relative md:h-48 h-28 bg-slate rounded-bl-4xl">

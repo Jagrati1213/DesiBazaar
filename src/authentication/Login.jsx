@@ -41,7 +41,7 @@ function Login() {
   return ( 
     userExit ?
     <Profile/> :  
-    (<div className="min-h-screen  flex justify-center items-center">
+    (<div className="mt-10 flex justify-center items-center">
         <div className="md:w-[400px] w-auto bg-white rounded-3xl mx-auto overflow-hidden shadow-xl">
 
         <div className="relative md:h-48 h-28 bg-slate rounded-bl-4xl">
