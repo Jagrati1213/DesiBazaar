@@ -51,7 +51,7 @@ function LimitProduct({baseurl,title}) {
                         })
                 ):(
                     Array(4).fill(null).map((_,i)=>{
-                     return <Col className="gutter-row my-3"  xs={{span: 24, }} lg={{span: 6}} md={{span: 8}} key={i.id} style={{cursor:'pointer'}}> 
+                     return <Col className="gutter-row my-3"  xs={{span: 24, }} lg={{span: 6}} md={{span: 8}} key={i} style={{cursor:'pointer'}}> 
 
                             <Card key={i}
                             loading={true}
