@@ -1,3 +1,8 @@
 .overscroll::-webkit-scrollbar{
         appearance: none;
 }
+.table{
+    :global(.ant-table-row){
+        background-color: white;
+    }
+}
