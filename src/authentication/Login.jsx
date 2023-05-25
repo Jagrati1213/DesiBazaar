@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import { logIn } from '../Store/AuthReducer';
-import Profile from '../pages/Profile/Index';
+import Profile from '../pages/Profile';
 import { toast } from 'react-hot-toast';
 import { Input } from 'antd';
 

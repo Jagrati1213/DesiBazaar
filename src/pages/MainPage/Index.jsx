@@ -1,18 +1,18 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import  Home  from '../Home/Index';
+import  Home  from '../Home';
 import { Header } from '../../components/navbar/Header'
-import Cart from '../Cart/Index';
+import Cart from '../Cart';
 import { Toaster } from "react-hot-toast";
-import Wishlist from '../Wishlist/Index';
+import Wishlist from '../Wishlist';
 import Login from '../../authentication/Login';
 import SignIn from '../../authentication/SignIn';
-import Checkout from '../Checkout/Index';
-import OrderSuccess from '../OrderSuccess/Index';
+import Checkout from '../Checkout';
+import OrderSuccess from '../OrderSuccess';
 import Footer from '../../components/footer/Footer';
-import SingleProduct from '../SingleProduct/Index';
-import AllProduct from '../AllProduct/Index';
-import Error from '../Error/Index';
+import SingleProduct from '../SingleProduct';
+import AllProduct from '../AllProduct';
+import Error from '../Error';
 
 function MainPage() {
   return (

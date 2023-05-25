@@ -1,5 +1,5 @@
 import React from 'react';
-import LimitProduct from '../../components/LmitProduct/Index';
+import LimitProduct from '../../components/LmitProduct';
 
 function AllProduct() {  
   return (
