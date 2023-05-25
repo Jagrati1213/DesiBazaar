@@ -1,5 +1,5 @@
-// import React, { useState,useEffect, useCallback } from 'react';
-import React, { useState, useCallback } from 'react';
+import React, { useState,useEffect, useCallback } from 'react';
+// import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from "react-router-dom";
 import { sigIn } from '../Store/AuthReducer';
@@ -16,10 +16,10 @@ function SignIn() {
     const dispatch = useDispatch();
 
     //_____ Store User Details
-    const handlerSubmit = useCallback((event)=>{
+    const handlerSubmit = (event)=>{
         event.preventDefault();
-        if( name === '' && username ==='' && password ===''){
-           alert('fill all feilds') 
+        if( name ==='' || username ==='' || password ===''){
+           return alert('fill all feilds'); 
         }else{
             dispatch(
                 sigIn(
@@ -33,10 +33,10 @@ function SignIn() {
             setUserName('');
             setPassword(''); 
         }
-    },[dispatch,name,username,password]);
+    };
 
    //____ Recall the reducers 
-  // useEffect(()=>{},[dispatch]);
+  useCallback(()=>{},[dispatch,handlerSubmit]);
 
   return ( 
     <div className=" mt-10 flex justify-center items-center" >
