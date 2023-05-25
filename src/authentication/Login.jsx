@@ -34,7 +34,7 @@ function Login() {
             setUserName('');
             setPassword('');
         }
-    });
+    },[dispatch,password,username]);
 
     useEffect(()=>{},[userExit]);
   
