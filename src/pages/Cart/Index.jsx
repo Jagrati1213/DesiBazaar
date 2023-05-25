@@ -5,7 +5,7 @@ import { Avatar, Col,List, Steps, Row, Table, Image, Card, Button } from 'antd';
 import { DeleteFilled,PlusCircleOutlined,MinusCircleOutlined } from "@ant-design/icons";
 
 // import { calculatePrice, decrementItems, incrementItems } from '../reduxStore/ProductReducer';
-import { userDecrementItems, calculatePrice, userIncrementItems, removeCartItem } from '../../reduxStore/AuthReducer';
+import { userDecrementItems, calculatePrice, userIncrementItems, removeCartItem } from '../../Store/AuthReducer';
 import style from './style.module.scss'
 
 
@@ -43,9 +43,9 @@ function Cart() {
       poduct: `${ele.cartItem?.title}`,
       price: `${Math.ceil(ele.cartItem?.price)}`,
       quantity:<>
-              <span className='text-xl text-slate md:mr-3 cursor-pointer' onClick={()=>increment(ele.cartItem?.id)}><PlusCircleOutlined /></span> 
-              <span className='text-semibold'> {ele.quantity} </span>
               <span className='text-xl text-slate md:ml-3 cursor-pointer' onClick={()=>decrement(ele.cartItem?.id)}><MinusCircleOutlined /></span>
+              <span className='text-semibold'> {ele.quantity} </span>
+              <span className='text-xl text-slate md:mr-3 cursor-pointer' onClick={()=>increment(ele.cartItem?.id)}><PlusCircleOutlined /></span> 
               </>,
       dump: <DeleteFilled   onClick={()=>deletItem(ele.cartItem?.id)} className='text-slate cursor-pointer text-lg text-center'/>,
     };
