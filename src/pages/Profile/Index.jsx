@@ -1,13 +1,14 @@
-import React, { useCallback, useEffect, useState } from 'react';
+// import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from '../../reduxStore/AuthReducer';
 import { Avatar, List } from 'antd';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 function Profile() {
 
 
-    const [data, setData] = useState([]);
+    // const [data, setData] = useState([]);
     
     //___ call methods from reducer
     const dispatch = useDispatch();
