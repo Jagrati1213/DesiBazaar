@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Col, Row,Image } from 'antd';
+import { Col, Row,Image, Skeleton } from 'antd';
 import { StarFilled } from "@ant-design/icons";
 import { BsBagHeartFill, BsHeartFill} from "react-icons/bs";
 import { IconContext } from 'react-icons';
@@ -121,7 +121,19 @@ function SingleProduct() {
             </Col>
          </Row>
         ):(
-          <h1> Somthing is wrong</h1>
+          <Row className='h-auto xl:mx-[10rem] mx-2'>
+
+          {/* SingleProduct Image */}
+          <Col xs={{span:24,}} lg={{span:12,}} className={`${Style.skeleton} lg:border-r-2 flex justify-center items-center p-4 overflow-hidden`}>
+              <Skeleton.Image active={true}  style={{width:'100%',height:'40vh'}}/>
+          </Col>
+
+          {/* SingleProduct Details */}
+          <Col xs={{span:24,}} lg={{span:12,}} className='p-8'>
+            <Skeleton />   
+            <Skeleton.Input active={true} size={'default'} className='mt-6'/> 
+          </Col>
+       </Row>
         )
       }
 
