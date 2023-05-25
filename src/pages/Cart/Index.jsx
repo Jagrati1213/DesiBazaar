@@ -120,21 +120,21 @@ function Cart() {
           </>
         ):
         (
-          <div className='p-10 w-[90%] px-10 rounded mx-auto'>
-          <List
-              itemLayout="horizontal"
-              dataSource={currentUser?.userOrder}
-              renderItem={(item)=>
-                  (
-                  <List.Item>
-                      <List.Item.Meta
-                          avatar={<Avatar src={item.cartItem.image} />}
-                          title={item.cartItem.title}
-                          description={`${Math.ceil(item.cartItem.price)}`}
-                      />
-                  </List.Item>
-              )}/> 
-      </div>
+        <div className='p-10 w-[90%] px-10 rounded mx-auto'>
+            <List
+                itemLayout="horizontal"
+                dataSource={currentUser?.userCart}
+                renderItem={(item)=>
+                    (
+                    <List.Item>
+                        <List.Item.Meta
+                            avatar={<Avatar src={item.cartItem.image} />}
+                            title={item.cartItem.title}
+                            description={`${Math.ceil(item.cartItem.price)}`}
+                        />
+                    </List.Item>
+                )}/> 
+        </div>
         )
       }
       </Row>
