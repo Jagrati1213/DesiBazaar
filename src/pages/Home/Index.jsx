@@ -4,7 +4,7 @@ import LimitProduct from '../../components/LmitProduct/Index'
 
 function Home() {
   return (
-    <main className='home'>
+    <main className='home mt-[-90px]'>
           <Craousel/>
           <LimitProduct baseurl={'https://fakestoreapi.com/products/category/jewelery'} title={"Jewelery"}/>
           <LimitProduct baseurl={'https://fakestoreapi.com/products/category/electronics'} title={"Electronics"}/>
