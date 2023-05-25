@@ -8,37 +8,21 @@ import { useSelector } from 'react-redux';
 
 function MenuList({navbarOpen}) {
 
-    const { userDetails } = useSelector(state => state.user);
-    
     //____ Get the current user
-    // const currentUserIndex = userDetails.indexOf(userDetails.find((i) => i.isUser === true));
+    const { userDetails } = useSelector(state => state.user);
     const currentUser = userDetails.find((i) => i.isUser === true);
 
     //____ Set the quantity as header
     const [count, setCount] = useState(0);
+    const [wish, setWish] = useState(0);
     let bagCount = 0;
-
-    // useEffect(()=>{
-       
-    //     let bagCount = 0;
-        
-    //     // check is user's exit or not
-    //     if(userDetails[currentUserIndex]?.isUser === true){
-    //         // calculate all item's quantity
-    //         userDetails[currentUserIndex]?.userCart.map((item)=>{
-    //            bagCount += Number(item?.quantity);
-    //        }) 
-    //     }else{
-    //         bagCount = 0;
-    //     }
-    //     setCount(bagCount);
-    // },[userDetails]);
 
     useEffect(()=>{  
         currentUser?.userCart.map((item)=>{
             bagCount += Number(item?.quantity);
         }) 
-           setCount(bagCount);
+        setCount(bagCount);
+        setWish(currentUser?.userWish.length);
     },[userDetails]);
 
   return (
@@ -61,11 +45,13 @@ function MenuList({navbarOpen}) {
             </li>
 
             <li className='md:my-0 my-4'>
-                <IconContext.Provider value={{size:'18px'}}>
-                    <Link to="/whislist" className="block p-2 bg-slate text-whiteSmoke rounded-full">
+            <Badge count={wish} showZero className="block text-slate">
+                <IconContext.Provider  value={{size:'26px' ,color:'#2c4152'}}>
+                    <Link to="/whislist" className="block text-slate">
                         <FaHeart/>
                     </Link>
                 </IconContext.Provider>
+            </Badge>
             </li>
             <li className='md:my-0 my-4'>
                 <Badge count={count} showZero className="block text-slate">
