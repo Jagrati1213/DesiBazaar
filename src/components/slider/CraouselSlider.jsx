@@ -12,7 +12,7 @@ const contentStyle = {
     width:'100%'
   };
 
-function Craousel() {
+function CraouselSlider() {
 
     const onChange = (currentSlide) => { };
   return (
@@ -35,4 +35,4 @@ function Craousel() {
   )
 }
 
-export  { Craousel }
+export default CraouselSlider;

@@ -1,11 +1,11 @@
 import React from 'react'
-import { Craousel } from '../../components/slider/Craousel'
-import LimitProduct from '../../components/LmitProduct'
+import LimitProduct from '../components/LmitProduct'
+import CraouselSlider from '../components/slider/CraouselSlider';
 
 function Home() {
   return (
     <main className='home mt-[-90px]'>
-          <Craousel/>
+          <CraouselSlider/>
           <LimitProduct baseurl={'https://fakestoreapi.com/products/category/jewelery'} title={"Jewelery"}/>
           <LimitProduct baseurl={'https://fakestoreapi.com/products/category/electronics'} title={"Electronics"}/>
     </main>
