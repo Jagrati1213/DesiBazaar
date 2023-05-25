@@ -72,7 +72,7 @@ function SingleProduct() {
 // useEffect(()=>{},[dispatch]);
 
   return (
-    <main className='mt-[90px] w-full py-[4rem]'>
+    <main className='singleproduct py-[4rem]'>
       {
         singlepr !== null?(
           <Row className='h-auto xl:mx-[10rem] mx-2'>

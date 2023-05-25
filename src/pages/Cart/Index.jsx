@@ -36,7 +36,7 @@ function Cart() {
 
 
   return (
-    <main className='mt-[90px] py-10 min-h-screen'>
+    <main className='cart'>
       <Row className='w-full mx-auto lg:flex-row flex-col'>
         { currentUser?.userCart.length > 0?
         (
@@ -123,7 +123,7 @@ function Cart() {
           <div className='p-10 w-[90%] px-10 rounded mx-auto'>
           <List
               itemLayout="horizontal"
-              dataSource={currentUser.userOrder}
+              dataSource={currentUser?.userOrder}
               renderItem={(item)=>
                   (
                   <List.Item>

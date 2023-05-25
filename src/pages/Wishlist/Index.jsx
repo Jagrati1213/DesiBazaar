@@ -43,7 +43,7 @@ function Wishlist() {
     <main className='mt-[90px] p-4 md:p-10 w-full min-h-screen'>
         <Row gutter={[16,16]} justify="space-center" className='xl:justify-start justify-center'>
           {
-            currentUser.userWish.length?
+            currentUser?
             (
               currentUser.userWish.map((ele)=>{
                 return(
@@ -75,7 +75,7 @@ function Wishlist() {
               <div className='p-10 w-[90%] px-10 rounded mx-auto'>
               <List
                   itemLayout="horizontal"
-                  dataSource={currentUser.userOrder}
+                  dataSource={currentUser?.userWish}
                   renderItem={(item)=>
                       (
                       <List.Item>
