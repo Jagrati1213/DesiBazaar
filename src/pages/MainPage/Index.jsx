@@ -1,18 +1,18 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import  Home  from './Home/Index';
-import { Header } from '../components/navbar/Header'
-import Cart from './Cart/Index';
+import  Home  from '../Home/Index';
+import { Header } from '../../components/navbar/Header'
+import Cart from '../Cart/Index';
 import { Toaster } from "react-hot-toast";
-import Wishlist from './Wishlist/Index';
-import Login from '../authentication/Login';
-import SignIn from '../authentication/SignIn';
-import Checkout from './Checkout/Index';
-import OrderSuccess from './OrderSuccess/Index';
-import Footer from '../components/footer/Footer';
-import SingleProduct from './SingleProduct/Index';
-import AllProduct from './AllProduct/Index';
-import Error from './Error/Index';
+import Wishlist from '../Wishlist/Index';
+import Login from '../../authentication/Login';
+import SignIn from '../../authentication/SignIn';
+import Checkout from '../Checkout/Index';
+import OrderSuccess from '../OrderSuccess/Index';
+import Footer from '../../components/footer/Footer';
+import SingleProduct from '../SingleProduct/Index';
+import AllProduct from '../AllProduct/Index';
+import Error from '../Error/Index';
 
 function MainPage() {
   return (
@@ -42,4 +42,4 @@ function MainPage() {
   )
 }
 
-export {MainPage}
+export default MainPage;
