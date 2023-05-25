@@ -2,7 +2,7 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from '../../reduxStore/AuthReducer';
-import { Avatar, List } from 'antd';
+import { Image, List } from 'antd';
 // import { Link } from 'react-router-dom';
 
 function Profile() {
@@ -34,16 +34,16 @@ function Profile() {
 
             {/* OrderList Items */}
             {
-                <div className='border-2 p-10 w-[90%] px-10 rounded shadow-md shadow-whiteSmoke'>
-                    <p className='text-xl'>My Orders</p>
+                <div className='border-t-2 p-10 w-[90%] px-10 rounded'>
+                    <p className='text-xl pb-8'>My Orders</p>
                     <List
                         itemLayout="horizontal"
                         dataSource={currentUser.userOrder}
                         renderItem={(item)=>
                             (
-                            <List.Item>
+                            <List.Item scroll={{ x: 1500,y: 300,}}>
                                 <List.Item.Meta
-                                    avatar={<Avatar src={item.cartItem.image} />}
+                                    avatar={<Image src={item.cartItem.image} style={{ width: "50px", height: "50px" }}/>}
                                     title={item.cartItem.title}
                                     description={`${Math.ceil(item.cartItem.price)}`}
                                 />
