@@ -35,13 +35,13 @@ function Profile() {
             {/* OrderList Items */}
             {
                 <div className='border-t-2 p-10 w-[90%] px-10 rounded'>
-                    <p className='text-xl pb-8'>My Orders</p>
+                    <p className='text-xl pb-8'>Your Orders</p>
                     <List
                         itemLayout="horizontal"
                         dataSource={currentUser.userOrder}
                         renderItem={(item)=>
                             (
-                            <List.Item scroll={{ x: 1500,y: 300,}}>
+                            <List.Item scroll={{ x: 300,y: 300,}}>
                                 <List.Item.Meta
                                     avatar={<Image src={item.cartItem.image} style={{ width: "50px", height: "50px" }}/>}
                                     title={item.cartItem.title}
