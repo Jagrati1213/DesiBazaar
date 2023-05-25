@@ -1,8 +1,8 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Card,Col,Row,Avatar,Skeleton,Switch } from 'antd';
-
+import { Card,Col,Row,Avatar,Skeleton } from 'antd';
 import {Link} from 'react-router-dom';
+import style from './style.module.scss';
 
 const { Meta } = Card;
 
@@ -50,17 +50,22 @@ function LimitProduct({baseurl,title}) {
                                  </Col>
                         })
                 ):(
-                    Array(8).fill(null).map((_,i)=>{
+                    Array(4).fill(null).map((_,i)=>{
                      return <Col className="gutter-row my-3"  xs={{span: 24, }} lg={{span: 6}} md={{span: 8}} key={i.id} style={{cursor:'pointer'}}> 
+
                             <Card key={i}
-                            loading={true}>
-                                <Skeleton loading={true} avatar active>
+                            loading={true}
+                            cover={
+                                <div className={`${style.skeleton_parent}`}>
+                                    <Skeleton.Image active={true}/>
+                               </div>
+                            }>
+                            <Skeleton loading={true} avatar active={true}>
                                     <Meta
                                         avatar={<Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=2" />}
                                         title="Card title"
-                                        description="This is the description"
-                                    />
-                                </Skeleton>
+                                        description="This is the description"/>
+                            </Skeleton>
                         </Card>
                     </Col>
                     })
