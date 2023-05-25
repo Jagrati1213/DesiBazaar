@@ -32,7 +32,7 @@ function SingleProduct() {
   const dispatch = useDispatch();
 
   //_____ Fetching Single Product 
-  const fetchSingleProduct = async()=>{
+  const fetchSingleProduct = useCallback(async()=>{
 
     await axios.get(`https://fakestoreapi.com/products/${params.producId}`)
      .then(res=> {
@@ -40,11 +40,11 @@ function SingleProduct() {
        setRate(res.data?.rating?.rate)
      })
      .catch((err)=> console.log(err))
- }
+ },[params]);
    
  useEffect(()=> {
        fetchSingleProduct()
-  },[params]);
+  },[params,fetchSingleProduct]);
 
   //_____ Set product to bag 
    const addToCart = useCallback((singlepr)=>{
@@ -57,7 +57,7 @@ function SingleProduct() {
       toast.error('Create Account..');
     }
     
-   },[singlepr])
+   },[dispatch,userExit])
 
   //_____ Set product in wishList
   const addToWlist = useCallback((singlepr)=>{
@@ -67,7 +67,7 @@ function SingleProduct() {
     }else{
       toast.error('Create Account..');
     }
-  },[singlepr])
+  },[dispatch,userExit])
 
 // useEffect(()=>{},[dispatch]);
 
