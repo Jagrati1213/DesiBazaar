@@ -3,7 +3,7 @@ import { Avatar, Card,Col,List,Row } from 'antd';
 import {Link} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 // import { addItems, calculatePrice } from '../reduxStore/ProductReducer';
-import { calculatePrice, removeListItem, userCartList } from '../../reduxStore/AuthReducer';
+import { calculatePrice, removeListItem, userCartList } from '../../Store/AuthReducer';
 import { CloseCircleFilled } from '@ant-design/icons';
 import style from './style.module.scss';
 

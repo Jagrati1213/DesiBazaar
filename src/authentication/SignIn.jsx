@@ -2,7 +2,7 @@
 import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from "react-router-dom";
-import { sigIn } from '../reduxStore/AuthReducer';
+import { sigIn } from '../Store/AuthReducer';
 import { Input } from "antd";
 
 function SignIn() {

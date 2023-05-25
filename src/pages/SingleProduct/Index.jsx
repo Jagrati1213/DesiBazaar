@@ -8,7 +8,7 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 // import { addItems, addToList, calculatePrice } from '../reduxStore/ProductReducer';
 import { toast } from 'react-hot-toast';
-import { calculatePrice, userCartList, userWishList } from '../../reduxStore/AuthReducer';
+import { calculatePrice, userCartList, userWishList } from '../../Store/AuthReducer';
 import Style from './style.module.scss'
 
 
