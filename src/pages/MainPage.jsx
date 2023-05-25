@@ -20,7 +20,7 @@ function MainPage() {
     <main className='h-full min-h-screen w-full overflow-x-hidden'>
         <Header/>
 
-        <main className='mt-[90px] w-full min-h-screen py-10 bg-red-500'>
+        <main className='mt-[90px] w-full min-h-screen py-8'>
 
      <Routes>
         <Route index element={<Home />} />
