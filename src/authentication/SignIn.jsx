@@ -1,9 +1,10 @@
-import React, { useState,useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 // import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from "react-router-dom";
 import { sigIn } from '../Store/AuthReducer';
 import { Input } from "antd";
+import { toast } from 'react-hot-toast';
 
 function SignIn() {
 
@@ -16,10 +17,10 @@ function SignIn() {
     const dispatch = useDispatch();
 
     //_____ Store User Details
-    const handlerSubmit = (event)=>{
+    const handlerSubmit = useCallback((event)=>{
         event.preventDefault();
         if( name ==='' || username ==='' || password ===''){
-           return alert('fill all feilds'); 
+            return toast.error('fill all fields')
         }else{
             dispatch(
                 sigIn(
@@ -33,10 +34,7 @@ function SignIn() {
             setUserName('');
             setPassword(''); 
         }
-    };
-
-   //____ Recall the reducers 
-  useCallback(()=>{},[dispatch,handlerSubmit]);
+    },[dispatch,name,password,username]);
 
   return ( 
     <div className=" mt-10 flex justify-center items-center" >

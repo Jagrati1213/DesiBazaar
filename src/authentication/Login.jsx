@@ -22,8 +22,8 @@ function Login() {
         event.preventDefault();
 
         //check is fields empty or not
-        if(username ==='' && password ===''){
-            toast.error('fill all fields')
+        if(username ==='' || password ===''){
+            return toast.error('fill all fields')
         }else{
             dispatch(
                 logIn(
