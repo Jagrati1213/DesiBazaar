@@ -1,9 +1,8 @@
-import MainPage from "./pages/MainPage";
-
+import Mainpage from './pages/Mainpage'
 function App() {
   return (
     <div className="App bg-stone-100 h-full">
-      <MainPage />
+      <Mainpage />
     </div>
   );
 }

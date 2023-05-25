@@ -1,20 +1,20 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import  Home  from '../Home';
-import { Header } from '../../components/navbar/Header'
-import Cart from '../Cart';
+import  Home  from './Home';
+import { Header } from '../components/navbar/Header'
+import Cart from './Cart';
 import { Toaster } from "react-hot-toast";
-import Wishlist from '../Wishlist';
-import Login from '../../authentication/Login';
-import SignIn from '../../authentication/SignIn';
-import Checkout from '../Checkout';
-import OrderSuccess from '../OrderSuccess';
-import Footer from '../../components/footer/Footer';
-import SingleProduct from '../SingleProduct';
-import AllProduct from '../AllProduct';
-import Error from '../Error';
+import Wishlist from './Wishlist';
+import Login from '../authentication/Login';
+import SignIn from '../authentication/SignIn';
+import Checkout from './Checkout';
+import OrderSuccess from './OrderSuccess';
+import Footer from '../components/footer/Footer';
+import SingleProduct from './SingleProduct';
+import AllProduct from './AllProduct';
+import Error from './Error';
 
-function MainPage() {
+function Mainpage() {
   return (
     <Router>
     <main className='h-full min-h-screen w-full overflow-x-hidden'>
@@ -42,4 +42,4 @@ function MainPage() {
   )
 }
 
-export default MainPage;
+export default Mainpage;
