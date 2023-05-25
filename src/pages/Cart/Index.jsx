@@ -37,9 +37,9 @@ function Cart() {
   },[dispatch]);
 
 
-  const dataSource = currentUser?.userCart.map((ele) => {
+  const dataSource = currentUser?.userCart.map((ele,index) => {
     return {
-      img: ( <Image src={ele.cartItem?.image} alt="img"className="priviewImg" style={{ width: "50px", height: "50px" }}/>),
+      img: ( <Image src={ele.cartItem?.image} alt="img"className="priviewImg" style={{ width: "50px", height: "50px" }} key={index}/>),
       poduct: `${ele.cartItem?.title}`,
       price: `${Math.ceil(ele.cartItem?.price)}`,
       quantity:<>
