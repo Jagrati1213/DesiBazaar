@@ -28,7 +28,7 @@ function Wishlist() {
         dispatch(userCartList(getItem.cartItem));
         dispatch(calculatePrice());
             
-  },[dispatch,currentUser.userWish])
+  },[dispatch,currentUser?.userWish])
 
   //_____ Delete wishlist item
   const deleteList = useCallback((itemId)=>{
@@ -40,7 +40,7 @@ function Wishlist() {
     <main className='wishlist'>
         <Row gutter={[16,16]} justify="space-center" className='xl:justify-start justify-center p-4'>
           {
-            currentUser.userWish.length > 0?
+            currentUser?.userWish.length > 0?
             (
               currentUser.userWish.map((ele)=>{
                 return(
