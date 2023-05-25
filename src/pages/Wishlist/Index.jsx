@@ -8,35 +8,32 @@ import { CloseCircleFilled } from '@ant-design/icons';
 import style from './style.module.scss';
 
 const { Meta } = Card;
-
 function Wishlist() {
 
-    // const {listArr} = useSelector((state)=> state.product);
+  // const {listArr} = useSelector((state)=> state.product);
 
-    //___Find current user
-    const { userDetails } = useSelector(state => state.user);
-    const currentUser = userDetails.find((i) => i.isUser === true);
+  //___Find current user
+  const { userDetails } = useSelector(state => state.user);
+  const currentUser = userDetails.find((i) => i.isUser === true);
 
-    //_____ For Calling reducer methods 
-    const dispatch = useDispatch();
+  //_____ For Calling reducer methods 
+  const dispatch = useDispatch();
 
-    //_____ Set Product To Bag 
-     const getItemId = useCallback((id)=>{
-      currentUser.userWish.map((i)=>{ 
-          /* find out that Id is exit in array if yes then return the element */
-            const getItem =  currentUser.userWish.find((k)=> k.cartItem.id === id);
-            if(getItem){
-                // dispatch(addItems(i.item));
-                dispatch(userCartList(i.cartItem));
-                dispatch(calculatePrice());
-            }
-        })
-     },[dispatch])
+  //_____ Set Product To Bag 
+  const getItemId = useCallback((id)=>{
+          
+      /* find out that Id is exit in array if yes then return the element */
+        const getItem =  currentUser.userWish.find((k)=> k.cartItem.id === id);
+        // dispatch(addItems(i.item));
+        dispatch(userCartList(getItem.cartItem));
+        dispatch(calculatePrice());
+            
+  },[dispatch,currentUser.userWish])
 
-    //_____ Delete wishlist item
-    const deleteList = useCallback((itemId)=>{
+  //_____ Delete wishlist item
+  const deleteList = useCallback((itemId)=>{
           dispatch(removeListItem(itemId));
-    },[dispatch]);
+  },[dispatch]);
 
 
   return (
