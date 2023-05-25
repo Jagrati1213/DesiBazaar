@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import { Avatar, Col,List, Steps, Row, Table, Image, Card, Button } from 'antd';
-import { DeleteOutlined } from "@ant-design/icons";
+import { DeleteFilled,PlusCircleOutlined,MinusCircleOutlined } from "@ant-design/icons";
 
 // import { calculatePrice, decrementItems, incrementItems } from '../reduxStore/ProductReducer';
 import { userDecrementItems, calculatePrice, userIncrementItems, removeCartItem } from '../../reduxStore/AuthReducer';
@@ -39,18 +39,15 @@ function Cart() {
 
   const dataSource = currentUser?.userCart.map((ele) => {
     return {
-      img: (
-        <Image
-          src={ele.cartItem?.image}
-          alt="img"
-          className="priviewImg"
-          style={{ width: "50px", height: "50px" }}
-        />
-      ),
+      img: ( <Image src={ele.cartItem?.image} alt="img"className="priviewImg" style={{ width: "50px", height: "50px" }}/>),
       poduct: `${ele.cartItem?.title}`,
       price: `${Math.ceil(ele.cartItem?.price)}`,
-      quantity: `${ele.quantity}`,
-      dump: <DeleteOutlined  onClick={()=>deletItem(ele.cartItem?.id)}/>,
+      quantity:<>
+              <span className='text-xl text-slate md:mr-3 cursor-pointer' onClick={()=>increment(ele.cartItem?.id)}><PlusCircleOutlined /></span> 
+              <span className='text-semibold'> {ele.quantity} </span>
+              <span className='text-xl text-slate md:ml-3 cursor-pointer' onClick={()=>decrement(ele.cartItem?.id)}><MinusCircleOutlined /></span>
+              </>,
+      dump: <DeleteFilled   onClick={()=>deletItem(ele.cartItem?.id)} className='text-slate cursor-pointer text-lg text-center'/>,
     };
   });
 
@@ -78,7 +75,15 @@ function Cart() {
             
             {/* Cart items */}
             <Col lg={{span:15}} sm={{span:24}} className='md:mr-0 mr-4 ml-4 overflow-x-auto'>
-              <Table dataSource={dataSource} columns={columns} pagination={false} className={`${style.table}`}/>
+              <Table 
+                    dataSource={dataSource} 
+                    columns={columns} 
+                    pagination={false} 
+                    scroll={{
+                      x:440,
+                      y: 440,
+                    }}
+                    className={`${style.table}` }/>
             </Col>
 
             {/* Cart total */}

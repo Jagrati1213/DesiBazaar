@@ -2,7 +2,16 @@
         appearance: none;
 }
 .table{
+    width: 100%;
+    overflow-x: auto;
+    table-layout: auto;
     :global(.ant-table-row){
-        background-color: white;
+        width: 100%;
+        overflow-x: scroll;
+        background-color:white;
+        
+    }
+    ::-webkit-scrollbar{
+            appearance: none;
     }
 }
