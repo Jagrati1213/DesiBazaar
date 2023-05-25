@@ -2,11 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-hot-toast';
 
 /*
-* create session storage
+* create Local storage
 * for set User Details & userStatus
 */
-const storage = sessionStorage.getItem('userDetails') !== null ? JSON.parse(sessionStorage.getItem('userDetails')) : [];
-const userExit = sessionStorage.getItem('userDetails') !== null ? JSON.parse(sessionStorage.getItem('userExit')) : false;
+const storage = localStorage.getItem('userDetails') !== null ? JSON.parse(localStorage.getItem('userDetails')) : [];
+const userExit = localStorage.getItem('userDetails') !== null ? JSON.parse(localStorage.getItem('userExit')) : false;
 
 const initialState = {
     userDetails: storage,
@@ -31,8 +31,8 @@ const userDetailsSlice = createSlice({
                 state.userExit = IsLoggin.isUser;
 
                 // reset storage
-                sessionStorage.setItem('userExit', JSON.stringify(state.userExit));
-                sessionStorage.setItem('userDetails', JSON.stringify(state.userDetails));
+                localStorage.setItem('userExit', JSON.stringify(state.userExit));
+                localStorage.setItem('userDetails', JSON.stringify(state.userDetails));
 
             } else {
                 toast.error('user not found');
@@ -47,8 +47,8 @@ const userDetailsSlice = createSlice({
             state.userExit = false;
 
             // reset storage
-            sessionStorage.setItem('userExit', JSON.stringify(state.userExit));
-            sessionStorage.setItem('userDetails', JSON.stringify(state.userDetails))
+            localStorage.setItem('userExit', JSON.stringify(state.userExit));
+            localStorage.setItem('userDetails', JSON.stringify(state.userDetails))
         },
 
         sigIn: (state, action) => {
@@ -71,7 +71,7 @@ const userDetailsSlice = createSlice({
                     delivery: 0,
                 });
                 // set storage
-                sessionStorage.setItem('userDetails', JSON.stringify(state.userDetails))
+                localStorage.setItem('userDetails', JSON.stringify(state.userDetails))
             }
         },
 
@@ -90,7 +90,7 @@ const userDetailsSlice = createSlice({
                 currentUser.userCart.push({ cartItem, quantity: 1 });
             }
             // reset storage
-            sessionStorage.setItem('userDetails', JSON.stringify(state.userDetails))
+            localStorage.setItem('userDetails', JSON.stringify(state.userDetails))
         },
 
         userWishList: (state, action) => {
@@ -109,7 +109,7 @@ const userDetailsSlice = createSlice({
                 toast.success('Added to list');
             }
             // reset storage
-            sessionStorage.setItem('userDetails', JSON.stringify(state.userDetails))
+            localStorage.setItem('userDetails', JSON.stringify(state.userDetails))
         },
 
         removeCartItem: (state, action) => {
@@ -121,7 +121,7 @@ const userDetailsSlice = createSlice({
             // remove item from cart array
             currentUser.userCart.splice(itemIndex, 1);
             // reset storage
-            sessionStorage.setItem('userDetails', JSON.stringify(state.userDetails))
+            localStorage.setItem('userDetails', JSON.stringify(state.userDetails))
 
         },
 
@@ -135,7 +135,7 @@ const userDetailsSlice = createSlice({
             // remove item from cart array
             currentUser.userWish.splice(itemIndex, 1);
             // reset storage
-            sessionStorage.setItem('userDetails', JSON.stringify(state.userDetails))
+            localStorage.setItem('userDetails', JSON.stringify(state.userDetails))
         },
 
         calculatePrice: (state) => {
@@ -149,7 +149,7 @@ const userDetailsSlice = createSlice({
             currentUser.delivery = state.subTotal > 1000 ? 0 : 200;
             currentUser.total = currentUser.subTotal + currentUser.delivery;
             // reset storage
-            sessionStorage.setItem('userDetails', JSON.stringify(state.userDetails))
+            localStorage.setItem('userDetails', JSON.stringify(state.userDetails))
         },
 
         userDecrementItems: (state, action) => {
@@ -184,14 +184,14 @@ const userDetailsSlice = createSlice({
             const currentUser = state.userDetails.find((i) => i.isUser === true);
             currentUser.userOrder.push(cartItem);
             // reset storage
-            sessionStorage.setItem('userDetails', JSON.stringify(state.userDetails));
+            localStorage.setItem('userDetails', JSON.stringify(state.userDetails));
         },
 
         clearCartList: (state) => {
             const currentUser = state.userDetails.find((i) => i.isUser === true);
             currentUser.userCart = [];
             // reset storage
-            sessionStorage.setItem('userDetails', JSON.stringify(state.userDetails));
+            localStorage.setItem('userDetails', JSON.stringify(state.userDetails));
         }
 
     }
