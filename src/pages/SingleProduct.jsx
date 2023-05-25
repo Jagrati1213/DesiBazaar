@@ -6,10 +6,9 @@ import { IconContext } from 'react-icons';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-// import { addItems, addToList, calculatePrice } from '../reduxStore/ProductReducer';
 import { toast } from 'react-hot-toast';
-import { calculatePrice, userCartList, userWishList } from '../../Store/AuthReducer';
-import Style from './style.module.scss'
+import { calculatePrice, userCartList, userWishList } from '../Store/AuthReducer';
+import Style from '../style/single.module.scss'
 
 
 function SingleProduct() {
@@ -20,11 +19,6 @@ function SingleProduct() {
   //____ Check is user loggin or not
   const { userExit } = useSelector(state => state.user);
 
-  //_____ get carts, and wishlist carts
-  /* const productDetails = useSelector(state => state.product.products);
-     const listDetails = useSelector(state => state.product.li stArr);
-  */
-  
   //_____ For get productId 
   const params = useParams();
 
@@ -49,7 +43,6 @@ function SingleProduct() {
   //_____ Set product to bag 
    const addToCart = useCallback((singlepr)=>{
     if(userExit){
-      //  dispatch(addItems(singlepr));
        dispatch( userCartList(singlepr));
        dispatch(calculatePrice());
     }
@@ -62,14 +55,12 @@ function SingleProduct() {
   //_____ Set product in wishList
   const addToWlist = useCallback((singlepr)=>{
     if(userExit){
-        // dispatch(addToList(singlepr));
         dispatch( userWishList(singlepr));
     }else{
       toast.error('Create Account..');
     }
   },[dispatch,userExit])
 
-// useEffect(()=>{},[dispatch]);
 
   return (
     <main className='singleproduct py-[4rem]'>

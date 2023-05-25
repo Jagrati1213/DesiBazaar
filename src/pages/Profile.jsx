@@ -1,9 +1,7 @@
-// import React, { useCallback, useEffect, useState } from 'react';
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { logOut } from '../../Store/AuthReducer';
+import { logOut } from '../Store/AuthReducer';
 import { Image, List } from 'antd';
-// import { Link } from 'react-router-dom';
 
 function Profile() {
     
@@ -19,13 +17,11 @@ function Profile() {
         dispatch(logOut());
     },[dispatch]);
 
-//   useEffect(()=>{},[dispatch]);
-
   return (
         <main className='profile flex items-center flex-col'>
             <div className='flex md:justify-between justify-center items-center rounded my-10 py-6 w-[90%] flex-wrap md:flex-row flex-col'>
                 <h3 className='text-3xl text-slate font-semibold text-center'>
-                    welcome  <span className='uppercase'>{currentUser.user.name}</span></h3>
+                    welcome,  <span className='uppercase'>{currentUser.user.name}</span></h3>
                 <button onClick={handleLogout} className='text-whiteSmoke md:mt-0 mt-8 bg-slate py-2 px-10 rounded hover:bg-black'>Log Out</button>
             </div>
 

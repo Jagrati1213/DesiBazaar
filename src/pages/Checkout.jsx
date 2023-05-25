@@ -3,7 +3,7 @@ import { Steps,Radio, Form, Input } from 'antd';
 import Link from 'antd/es/typography/Link';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearCartList, userOrderList } from '../../Store/AuthReducer';
+import { clearCartList, userOrderList } from '../Store/AuthReducer';
 
 
 function Checkout() {

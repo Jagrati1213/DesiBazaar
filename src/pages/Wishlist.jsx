@@ -2,16 +2,13 @@ import React, { useCallback } from 'react';
 import { Avatar, Card,Col,List,Row } from 'antd';
 import {Link} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-// import { addItems, calculatePrice } from '../reduxStore/ProductReducer';
-import { calculatePrice, removeListItem, userCartList } from '../../Store/AuthReducer';
+import { calculatePrice, removeListItem, userCartList } from '../Store/AuthReducer';
 import { CloseCircleFilled } from '@ant-design/icons';
-import style from './style.module.scss';
+import style from '../style/wishlist.module.scss';
 
 const { Meta } = Card;
+
 function Wishlist() {
-
-  // const {listArr} = useSelector((state)=> state.product);
-
   //___Find current user
   const { userDetails } = useSelector(state => state.user);
   const currentUser = userDetails.find((i) => i.isUser === true);
@@ -24,7 +21,6 @@ function Wishlist() {
           
       /* find out that Id is exit in array if yes then return the element */
         const getItem =  currentUser.userWish.find((k)=> k.cartItem.id === id);
-        // dispatch(addItems(i.item));
         dispatch(userCartList(getItem.cartItem));
         dispatch(calculatePrice());
             

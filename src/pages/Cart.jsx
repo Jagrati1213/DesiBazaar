@@ -3,10 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import { Avatar, Col,List, Steps, Row, Table, Image, Card, Button } from 'antd';
 import { DeleteFilled,PlusCircleOutlined,MinusCircleOutlined } from "@ant-design/icons";
-
-// import { calculatePrice, decrementItems, incrementItems } from '../reduxStore/ProductReducer';
-import { userDecrementItems, calculatePrice, userIncrementItems, removeCartItem } from '../../Store/AuthReducer';
-import style from './style.module.scss'
+import { userDecrementItems, calculatePrice, userIncrementItems, removeCartItem } from '../Store/AuthReducer';
+import style from '../style/cart.module.scss';
 
 
 function Cart() {
@@ -37,7 +35,7 @@ function Cart() {
   },[dispatch]);
 
 
-  const dataSource = currentUser?.userCart.map((ele,index) => {
+  const dataSource = currentUser?.userCart.map((ele) => {
     return {
       img: ( <Image src={ele.cartItem?.image} alt="img"className="priviewImg" style={{ width: "50px", height: "50px" }}/>),
       poduct: `${ele.cartItem?.title}`,
@@ -75,7 +73,7 @@ function Cart() {
              </Col>  
             
             {/* Cart items */}
-            <Col lg={{span:15}} sm={{span:24}} className='md:mr-0 mr-4 ml-4 overflow-x-auto'>
+            <Col xl={{span:15}} sm={{span:24}} className='md:mr-0 mr-4 ml-4 overflow-x-auto'>
               <Table 
                     dataSource={dataSource} 
                     columns={columns} 
@@ -88,7 +86,7 @@ function Cart() {
             </Col>
 
             {/* Cart total */}
-            <Col lg={{span:8}} sm={{span:24}} className='ml-4'>
+            <Col xl={{span:8}} sm={{span:24}} className='ml-4'>
               <Card title="Cart totals"
                 bordered={false}
                 style={{ width: "100%" }}

@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Card,Col,Row,Avatar,Skeleton } from 'antd';
 import {Link} from 'react-router-dom';
-import style from './style.module.scss';
+import style from '../style/limitproduct.module.scss';
 
 const { Meta } = Card;
 

@@ -1,6 +1,6 @@
 import React from 'react'
-import LimitProduct from '../components/LmitProduct'
-import CraouselSlider from '../components/slider/CraouselSlider';
+import LimitProduct from '../components/LimitProduct'
+import CraouselSlider from '../components/CraouselSlider';
 
 function Home() {
   return (
