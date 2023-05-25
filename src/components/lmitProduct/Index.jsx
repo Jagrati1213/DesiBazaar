@@ -43,8 +43,9 @@ function LimitProduct({baseurl,title}) {
                                                 src={i.image}
                                                 />
                                             </div>
-                                            }>
-                                        <Meta title={i.title} description={`₹${Math.ceil(i.price)}`}/>
+                                            }
+                                            actions={[<h1>${i.price}</h1>]}>
+                                            <Meta title={i.title}/>
                                         </Card>
                                    </Link>
                                  </Col>
