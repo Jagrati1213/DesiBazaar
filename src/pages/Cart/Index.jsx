@@ -39,7 +39,7 @@ function Cart() {
 
   const dataSource = currentUser?.userCart.map((ele,index) => {
     return {
-      img: ( <Image src={ele.cartItem?.image} alt="img"className="priviewImg" style={{ width: "50px", height: "50px" }} key={index}/>),
+      img: ( <Image src={ele.cartItem?.image} alt="img"className="priviewImg" style={{ width: "50px", height: "50px" }}/>),
       poduct: `${ele.cartItem?.title}`,
       price: `${Math.ceil(ele.cartItem?.price)}`,
       quantity:<>
@@ -48,6 +48,7 @@ function Cart() {
               <span className='text-xl text-slate md:mr-3 cursor-pointer' onClick={()=>increment(ele.cartItem?.id)}><PlusCircleOutlined /></span> 
               </>,
       dump: <DeleteFilled   onClick={()=>deletItem(ele.cartItem?.id)} className='text-slate cursor-pointer text-lg text-center'/>,
+      key: `${ele.cartItem.id}`
     };
   });
 
@@ -126,7 +127,7 @@ function Cart() {
                 dataSource={currentUser?.userCart}
                 renderItem={(item)=>
                     (
-                    <List.Item>
+                    <List.Item key={item.cartItem.id}>
                         <List.Item.Meta
                             avatar={<Avatar src={item.cartItem.image} />}
                             title={item.cartItem.title}

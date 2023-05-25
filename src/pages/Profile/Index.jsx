@@ -38,7 +38,7 @@ function Profile() {
                         dataSource={currentUser.userOrder}
                         renderItem={(item)=>
                             (
-                            <List.Item scroll={{ x: 300,y: 300,}}>
+                            <List.Item scroll={{ x: 300,y: 300,}} key={item.cartItem.id}>
                                 <List.Item.Meta
                                     avatar={<Image src={item.cartItem.image} style={{ width: "50px", height: "50px" }}/>}
                                     title={item.cartItem.title}
