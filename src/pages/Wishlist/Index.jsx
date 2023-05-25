@@ -40,7 +40,7 @@ function Wishlist() {
     <main className='wishlist'>
         <Row gutter={[16,16]} justify="space-center" className='xl:justify-start justify-center p-4'>
           {
-            currentUser?
+            currentUser.userWish.length > 0?
             (
               currentUser.userWish.map((ele)=>{
                 return(
