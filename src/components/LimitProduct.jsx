@@ -10,19 +10,25 @@ function LimitProduct({baseurl,title}) {
 
     const [limitProduct, setLimitProduct] = useState(null);
     
-    //____ fetching fakestore products
-    const fetchingData = async()=>{
-        try{
-            const { data } = await axios.get(baseurl);
-            setLimitProduct(data);
-        }catch(err){
-         console.log(err);
-        }
-    }
+    useEffect(()=>{
 
- useEffect(()=>{
-    fetchingData(); 
- },[baseurl]);
+        let controller = new AbortController();
+        
+        //____ fetching fakestore products
+        const fetchingData = async()=>{
+            try{
+                const { data } = await axios.get(baseurl);
+                setLimitProduct(data);
+                controller = null;
+            }catch(err){
+            console.error(err);
+            }
+        }
+        fetchingData();
+        
+        // clean up 
+        return () => controller?.abort();
+    },[]);
 
   return (
     <main className='p-4 md:p-10 w-full py-10 site-card-wrapper'>
