@@ -7,17 +7,41 @@ import { toast } from 'react-hot-toast';
 */
 const storage = localStorage.getItem('userDetails') !== null ? JSON.parse(localStorage.getItem('userDetails')) : [];
 const userExit = localStorage.getItem('userDetails') !== null ? JSON.parse(localStorage.getItem('userExit')) : false;
+const localCart = localStorage.getItem('localCarts') !== null ? JSON.parse(localStorage.getItem('localCarts')) : [];
 
 const initialState = {
     userDetails: storage,
     userExit: userExit,
+    currentUser: null,
+    error: null,
+    localCarts: [],
 }
+
 
 const userDetailsSlice = createSlice({
     name: 'users',
     initialState,
     reducers: {
+        setUser: (state, action) => {
+            state.currentUser = action.payload;
+        },
+        removeUser: (state, action) => {
+            state.currentUser = action.payload;
+        },
+        addToLocal: (state, action) => {
+            if (!state.currentUser) {
+                toast.success('Added to cart')
+                state.localCarts.push(action.payload);
+                localStorage.setItem('localCarts', JSON.stringify(state.localCarts));
+            }
+        },
+        removeToLocal: (state, _) => {
+            state.localCarts = [];
+            localStorage.setItem('localCarts', JSON.stringify(state.localCarts));
+        },
 
+
+        // old code
         logIn: (state, action) => {
 
             const user = action.payload;
@@ -50,47 +74,23 @@ const userDetailsSlice = createSlice({
             localStorage.setItem('userExit', JSON.stringify(state.userExit));
             localStorage.setItem('userDetails', JSON.stringify(state.userDetails))
         },
-
-        sigIn: (state, action) => {
-
-            const user = action.payload;
-            const IsLoggin = state.userDetails.find((i) => (i.user.username === user.username) && (i.user.password === user.password));
-
-            if (IsLoggin) {
-                toast.error('User already exit');
-            } else {
-                toast.success(`SignIn successful, 🙂`);
-                state.userDetails.push({
-                    user,
-                    isUser: false,
-                    userCart: [],
-                    userWish: [],
-                    userOrder: [],
-                    total: 0,
-                    subTotal: 0,
-                    delivery: 0,
-                });
-                // set storage
-                localStorage.setItem('userDetails', JSON.stringify(state.userDetails))
-            }
-        },
-
         userCartList: (state, action) => {
 
             const cartItem = action.payload;
-            const currentUser = state.userDetails.find((i) => i.isUser === true);
-            const isItemExit = currentUser.userCart.find((i) => i.cartItem?.id === cartItem.id);
+            console.log(cartItem);
+            // const currentUser = state.userDetails.find((i) => i.isUser === true);
+            // const isItemExit = currentUser.userCart.find((i) => i.cartItem?.id === cartItem.id);
 
             // check item exit or not
-            if (isItemExit) {
-                isItemExit.quantity += 1
-            }
-            else {
-                toast.success('Added to cart')
-                currentUser.userCart.push({ cartItem, quantity: 1 });
-            }
-            // reset storage
-            localStorage.setItem('userDetails', JSON.stringify(state.userDetails))
+            // if (isItemExit) {
+            //     isItemExit.quantity += 1
+            // }
+            // else {
+            //     toast.success('Added to cart')
+            //     currentUser.userCart.push({ cartItem, quantity: 1 });
+            // }
+            // // reset storage
+            // localStorage.setItem('userDetails', JSON.stringify(state.userDetails))
         },
 
         userWishList: (state, action) => {
@@ -197,8 +197,27 @@ const userDetailsSlice = createSlice({
     }
 });
 
+// const userDetailsSlice = createSlice({
+//     name: 'users',
+//     initialState,
+//     reducers: {
+//         sigIn: (state, action) => {
+//             state.user = action.payload;
+//             state.error = null;
+//             console.log(state.user);
+//         },
+//         sigOut: (state, action) => {
+//             state.user = null;
+//             state.error = action.payload;
+//             console.log(user);
+//         }
+//     }
+// });
 export const {
-    sigIn,
+    setUser,
+    removeUser,
+    addToLocal,
+    removeToLocal,
     logIn,
     logOut,
     userCartList,
@@ -210,4 +229,8 @@ export const {
     userIncrementItems,
     userOrderList,
     clearCartList } = userDetailsSlice.actions;
+// export const {
+//     sigIn,
+//     sigOut
+// } = userDetailsSlice.actions;
 export default userDetailsSlice.reducer;
